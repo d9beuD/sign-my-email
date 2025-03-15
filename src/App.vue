@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import MailWindow from './components/Window.vue'
 import SidebarMain from './components/SidebarMain.vue'
 </script>
 
@@ -10,4 +11,10 @@ import SidebarMain from './components/SidebarMain.vue'
       </div>
     </div>
 
+    <div class="h-full grow">
+      <div class="h-full ps-8 pt-8">
+        <MailWindow />
+      </div>
+    </div>
+  </div>
 </template>
