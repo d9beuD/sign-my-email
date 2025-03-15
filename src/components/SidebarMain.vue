@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <h1 class="mb-4 flex items-center gap-x-2 text-lg text-primary">
+  <div class="flex flex-col space-y-4">
+    <h1 class="flex items-center gap-x-2 text-lg font-bold text-primary">
       <FontAwesomeIcon :icon="faSignature" />
       <span>Sign My Email</span>
     </h1>

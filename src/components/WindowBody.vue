@@ -4,7 +4,7 @@ import WindowBodyHeader from './WindowBodyHeader.vue'
 </script>
 
 <template>
-  <div class="ps-6">
+  <div class="ps-6 text-slate-500 dark:text-zinc-400">
     <WindowBodyHeader label="To" value="Your Recipient" />
     <WindowBodyHeader label="Subject" value="Your Subject" />
 
