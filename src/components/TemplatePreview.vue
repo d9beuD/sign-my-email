@@ -1,3 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useSignatureStore } from '@/stores/signature'
 
-<template><div></div></template>
+const signatureStore = useSignatureStore()
+</script>
+
+<template>
+  <div class="pt-4">
+    <component v-if="signatureStore.template" :is="signatureStore.template.template" />
+  </div>
+</template>

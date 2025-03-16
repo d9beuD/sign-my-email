@@ -1,3 +1,5 @@
+import type { Component } from 'vue'
+
 export interface MailSignature {
   personalInfo: PersonalInfo
   businessInfo: BusinessInfo
@@ -53,4 +55,5 @@ export interface SocialMedia {
 
 export interface Template {
   name: string
+  template: Component
 }
