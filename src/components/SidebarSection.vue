@@ -13,7 +13,7 @@ const props = defineProps<Props>()
 <template>
   <section>
     <h2 class="mb-2 flex items-center gap-x-3 border-b pb-2">
-      <FontAwesomeIcon :icon="props.icon" />
+      <FontAwesomeIcon :icon="props.icon" size="lg" />
       {{ props.title }}
     </h2>
 
