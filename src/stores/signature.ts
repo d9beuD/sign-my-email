@@ -36,8 +36,8 @@ export const useSignatureStore = defineStore('signature', () => {
     },
     text: {
       fontSize: {
-        base: 0,
-        title: 0,
+        base: 16,
+        title: 16,
       },
     },
     image: {

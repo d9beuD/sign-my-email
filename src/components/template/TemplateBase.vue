@@ -20,7 +20,10 @@ const textStyle = computed(() => `color: ${textColor.value};`)
     border="0"
     class="reset-links"
     :style="
-      `margin: 0px; border-collapse: collapse; font-size: 16px; line-height: 16px;` + textStyle
+      `margin: 0px; border-collapse: collapse;` +
+      `font-size: ${signatureStore.themeOptions.text.fontSize.base}px;` +
+      `line-height: ${signatureStore.themeOptions.text.fontSize.base}px;` +
+      textStyle
     "
   >
     <tbody>

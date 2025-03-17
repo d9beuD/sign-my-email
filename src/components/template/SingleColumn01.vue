@@ -30,7 +30,11 @@ const businessAddress = computed(() =>
 
 const personalNameStyle = computed(
   () =>
-    `font-weight: bold; margin-bottom: 8px; color: ${signatureStore.themeOptions.color.primary}`,
+    `font-weight: bold;` +
+    `margin-bottom: 8px;` +
+    `color: ${signatureStore.themeOptions.color.primary};` +
+    `font-size: ${signatureStore.themeOptions.text.fontSize.title}px;` +
+    `line-height: ${signatureStore.themeOptions.text.fontSize.title}px;`,
 )
 </script>
 
