@@ -8,9 +8,9 @@ import TemplateBase from './TemplateBase.vue'
 import TemplateRow from './TemplateRow.vue'
 import TemplateColumn from './TemplateColumn.vue'
 import TemplateDivider from './TemplateDivider.vue'
+import TemplateTextDecorated from './TemplateTextDecorated.vue'
 
 const signatureStore = useSignatureStore()
-const iconCellStyle = 'padding-right: 8px; margin-right: 1px; vertical-align: top;'
 
 const showFirstSection = computed(
   () =>
@@ -76,48 +76,33 @@ const personalNameStyle = computed(
     <TemplateRow v-if="showSecondSection">
       <TemplateColumn>
         <div v-if="signatureStore.personalInfo.email" style="margin-bottom: 8px">
-          <table>
-            <tbody>
-              <TemplateRow>
-                <TemplateColumn :style="iconCellStyle">
-                  <FontAwesomeIcon :icon="faEnvelope" fixed-width />
-                </TemplateColumn>
-                <TemplateColumn>
-                  {{ signatureStore.personalInfo.email }}
-                </TemplateColumn>
-              </TemplateRow>
-            </tbody>
-          </table>
+          <TemplateTextDecorated>
+            <template #icon>
+              <FontAwesomeIcon :icon="faLocationDot" fixed-width />
+            </template>
+
+            {{ signatureStore.personalInfo.email }}
+          </TemplateTextDecorated>
         </div>
         <div v-if="signatureStore.businessInfo.address" style="margin-bottom: 8px">
-          <table>
-            <tbody>
-              <TemplateRow>
-                <TemplateColumn :style="iconCellStyle">
-                  <FontAwesomeIcon :icon="faLocationDot" fixed-width />
-                </TemplateColumn>
-                <TemplateColumn>
-                  <div v-html="businessAddress"></div>
-                </TemplateColumn>
-              </TemplateRow>
-            </tbody>
-          </table>
+          <TemplateTextDecorated>
+            <template #icon>
+              <FontAwesomeIcon :icon="faEnvelope" fixed-width />
+            </template>
+
+            <div v-html="businessAddress"></div>
+          </TemplateTextDecorated>
         </div>
         <div v-if="signatureStore.businessInfo.website" style="margin-bottom: 8px">
-          <table>
-            <tbody>
-              <TemplateRow>
-                <TemplateColumn :style="iconCellStyle">
-                  <FontAwesomeIcon :icon="faLink" fixed-width />
-                </TemplateColumn>
-                <TemplateColumn>
-                  <a :href="signatureStore.businessInfo.website">{{
-                    signatureStore.businessInfo.website
-                  }}</a>
-                </TemplateColumn>
-              </TemplateRow>
-            </tbody>
-          </table>
+          <TemplateTextDecorated>
+            <template #icon>
+              <FontAwesomeIcon :icon="faLink" fixed-width />
+            </template>
+
+            <a :href="signatureStore.businessInfo.website">
+              {{ signatureStore.businessInfo.website }}
+            </a>
+          </TemplateTextDecorated>
         </div>
       </TemplateColumn>
     </TemplateRow>
