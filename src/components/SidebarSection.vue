@@ -12,11 +12,13 @@ const props = defineProps<Props>()
 
 <template>
   <section>
-    <h2 class="mb-2 flex items-center gap-x-3 border-b pb-2">
-      <FontAwesomeIcon :icon="props.icon" size="lg" />
+    <h2 class="mb-2 flex items-center gap-x-3">
+      <FontAwesomeIcon :icon="props.icon" size="lg" fixed-width />
       {{ props.title }}
     </h2>
 
-    <slot></slot>
+    <div class="ml-0 rounded-tl border-l border-t border-primary pl-4 pt-2">
+      <slot></slot>
+    </div>
   </section>
 </template>
