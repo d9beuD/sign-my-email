@@ -7,6 +7,7 @@ import { computed } from 'vue'
 import TemplateBase from './TemplateBase.vue'
 import TemplateRow from './TemplateRow.vue'
 import TemplateColumn from './TemplateColumn.vue'
+import TemplateDivider from './TemplateDivider.vue'
 
 const signatureStore = useSignatureStore()
 const iconCellStyle = 'padding-right: 8px; margin-right: 1px; vertical-align: top;'
@@ -68,7 +69,7 @@ const personalNameStyle = computed(
 
     <TemplateRow v-if="showFirstSection && showSecondSection">
       <TemplateColumn style="padding: 16px 0">
-        <div :style="`border-top: 2px solid ${signatureStore.themeOptions.color.primary};`"></div>
+        <TemplateDivider orientation="horizontal" />
       </TemplateColumn>
     </TemplateRow>
 
