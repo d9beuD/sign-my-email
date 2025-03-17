@@ -5,6 +5,7 @@ import { faEnvelope, faLink, faLocationDot } from '@fortawesome/pro-regular-svg-
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { computed } from 'vue'
 import TemplateBase from './TemplateBase.vue'
+import TemplateRow from './TemplateRow.vue'
 
 const signatureStore = useSignatureStore()
 const iconCellStyle = 'padding-right: 8px; margin-right: 1px; vertical-align: top;'
@@ -40,7 +41,7 @@ const personalNameStyle = computed(
 
 <template>
   <TemplateBase>
-    <tr v-if="showFirstSection">
+    <TemplateRow v-if="showFirstSection">
       <td>
         <div v-if="signatureStore.personalInfo.pictureUrl" style="padding-bottom: 8px">
           <img
@@ -62,48 +63,48 @@ const personalNameStyle = computed(
           {{ signatureStore.businessInfo.companyName }}
         </div>
       </td>
-    </tr>
+    </TemplateRow>
 
-    <tr v-if="showFirstSection && showSecondSection">
+    <TemplateRow v-if="showFirstSection && showSecondSection">
       <td style="padding: 16px 0">
         <div :style="`border-top: 2px solid ${signatureStore.themeOptions.color.primary};`"></div>
       </td>
-    </tr>
+    </TemplateRow>
 
-    <tr v-if="showSecondSection">
+    <TemplateRow v-if="showSecondSection">
       <td>
         <div v-if="signatureStore.personalInfo.email" style="margin-bottom: 8px">
           <table>
             <tbody>
-              <tr>
+              <TemplateRow>
                 <td :style="iconCellStyle">
                   <FontAwesomeIcon :icon="faEnvelope" fixed-width />
                 </td>
                 <td>
                   {{ signatureStore.personalInfo.email }}
                 </td>
-              </tr>
+              </TemplateRow>
             </tbody>
           </table>
         </div>
         <div v-if="signatureStore.businessInfo.address" style="margin-bottom: 8px">
           <table>
             <tbody>
-              <tr>
+              <TemplateRow>
                 <td :style="iconCellStyle">
                   <FontAwesomeIcon :icon="faLocationDot" fixed-width />
                 </td>
                 <td>
                   <div v-html="businessAddress"></div>
                 </td>
-              </tr>
+              </TemplateRow>
             </tbody>
           </table>
         </div>
         <div v-if="signatureStore.businessInfo.website" style="margin-bottom: 8px">
           <table>
             <tbody>
-              <tr>
+              <TemplateRow>
                 <td :style="iconCellStyle">
                   <FontAwesomeIcon :icon="faLink" fixed-width />
                 </td>
@@ -112,11 +113,11 @@ const personalNameStyle = computed(
                     signatureStore.businessInfo.website
                   }}</a>
                 </td>
-              </tr>
+              </TemplateRow>
             </tbody>
           </table>
         </div>
       </td>
-    </tr>
+    </TemplateRow>
   </TemplateBase>
 </template>
