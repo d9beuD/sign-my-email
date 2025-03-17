@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import WindowHeaderDots from './WindowHeaderDots.vue'
 import WindowHeaderSend from './WindowHeaderSend.vue'
+import WindowHeaderTheme from './WindowHeaderTheme.vue'
 </script>
 
 <template>
@@ -9,5 +10,6 @@ import WindowHeaderSend from './WindowHeaderSend.vue'
   >
     <WindowHeaderDots />
     <WindowHeaderSend />
+    <WindowHeaderTheme />
   </div>
 </template>
