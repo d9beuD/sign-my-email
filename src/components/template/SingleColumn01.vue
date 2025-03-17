@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { computed } from 'vue'
 import TemplateBase from './TemplateBase.vue'
 import TemplateRow from './TemplateRow.vue'
+import TemplateColumn from './TemplateColumn.vue'
 
 const signatureStore = useSignatureStore()
 const iconCellStyle = 'padding-right: 8px; margin-right: 1px; vertical-align: top;'
@@ -42,7 +43,7 @@ const personalNameStyle = computed(
 <template>
   <TemplateBase>
     <TemplateRow v-if="showFirstSection">
-      <td>
+      <TemplateColumn>
         <div v-if="signatureStore.personalInfo.pictureUrl" style="padding-bottom: 8px">
           <img
             :src="signatureStore.personalInfo.pictureUrl"
@@ -62,27 +63,27 @@ const personalNameStyle = computed(
         <div v-if="signatureStore.businessInfo.companyName">
           {{ signatureStore.businessInfo.companyName }}
         </div>
-      </td>
+      </TemplateColumn>
     </TemplateRow>
 
     <TemplateRow v-if="showFirstSection && showSecondSection">
-      <td style="padding: 16px 0">
+      <TemplateColumn style="padding: 16px 0">
         <div :style="`border-top: 2px solid ${signatureStore.themeOptions.color.primary};`"></div>
-      </td>
+      </TemplateColumn>
     </TemplateRow>
 
     <TemplateRow v-if="showSecondSection">
-      <td>
+      <TemplateColumn>
         <div v-if="signatureStore.personalInfo.email" style="margin-bottom: 8px">
           <table>
             <tbody>
               <TemplateRow>
-                <td :style="iconCellStyle">
+                <TemplateColumn :style="iconCellStyle">
                   <FontAwesomeIcon :icon="faEnvelope" fixed-width />
-                </td>
-                <td>
+                </TemplateColumn>
+                <TemplateColumn>
                   {{ signatureStore.personalInfo.email }}
-                </td>
+                </TemplateColumn>
               </TemplateRow>
             </tbody>
           </table>
@@ -91,12 +92,12 @@ const personalNameStyle = computed(
           <table>
             <tbody>
               <TemplateRow>
-                <td :style="iconCellStyle">
+                <TemplateColumn :style="iconCellStyle">
                   <FontAwesomeIcon :icon="faLocationDot" fixed-width />
-                </td>
-                <td>
+                </TemplateColumn>
+                <TemplateColumn>
                   <div v-html="businessAddress"></div>
-                </td>
+                </TemplateColumn>
               </TemplateRow>
             </tbody>
           </table>
@@ -105,19 +106,19 @@ const personalNameStyle = computed(
           <table>
             <tbody>
               <TemplateRow>
-                <td :style="iconCellStyle">
+                <TemplateColumn :style="iconCellStyle">
                   <FontAwesomeIcon :icon="faLink" fixed-width />
-                </td>
-                <td>
+                </TemplateColumn>
+                <TemplateColumn>
                   <a :href="signatureStore.businessInfo.website">{{
                     signatureStore.businessInfo.website
                   }}</a>
-                </td>
+                </TemplateColumn>
               </TemplateRow>
             </tbody>
           </table>
         </div>
-      </td>
+      </TemplateColumn>
     </TemplateRow>
   </TemplateBase>
 </template>
