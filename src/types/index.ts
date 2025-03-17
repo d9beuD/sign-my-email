@@ -55,5 +55,5 @@ export interface SocialMedia {
 
 export interface Template {
   name: string
-  template: Component
+  template?: Component
 }
