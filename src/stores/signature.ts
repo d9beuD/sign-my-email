@@ -1,4 +1,4 @@
-import type { Template, BusinessInfo, PersonalInfo } from '@/types'
+import type { Template, BusinessInfo, PersonalInfo, ThemeOptions } from '@/types'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -28,5 +28,27 @@ export const useSignatureStore = defineStore('signature', () => {
     template: undefined,
   })
 
-  return { personalInfo, businessInfo, template }
+  const themeOptions = ref<ThemeOptions>({
+    color: {
+      primary: '#3b82f6',
+      secondary: '#000000',
+      secondaryUnset: true,
+    },
+    text: {
+      fontSize: {
+        base: 0,
+        title: 0,
+      },
+    },
+    image: {
+      width: 0,
+      rounded: false,
+      borderRadius: 0,
+    },
+    separator: {
+      width: 0,
+    },
+  })
+
+  return { personalInfo, businessInfo, template, themeOptions }
 })
