@@ -7,7 +7,6 @@ import { computed } from 'vue'
 import TemplateBase from './TemplateBase.vue'
 
 const signatureStore = useSignatureStore()
-const primaryColor = '#3b82f6'
 const iconCellStyle = 'padding-right: 8px; margin-right: 1px; vertical-align: top;'
 
 const showFirstSection = computed(
@@ -28,6 +27,11 @@ const showSecondSection = computed(
 const businessAddress = computed(() =>
   signatureStore.businessInfo.address?.replace(/(?:\r\n|\r|\n)/g, '<br>'),
 )
+
+const personalNameStyle = computed(
+  () =>
+    `font-weight: bold; margin-bottom: 8px; color: ${signatureStore.themeOptions.color.primary}`,
+)
 </script>
 
 <template>
@@ -41,7 +45,7 @@ const businessAddress = computed(() =>
             :style="`width: ${signatureStore.personalInfo.pictureWidth}px`"
           />
         </div>
-        <div v-if="signatureStore.personalInfo.name" style="font-weight: bold; margin-bottom: 8px">
+        <div v-if="signatureStore.personalInfo.name" :style="personalNameStyle">
           {{ signatureStore.personalInfo.name }}
         </div>
         <div v-if="signatureStore.personalInfo.jobTitle">
@@ -58,7 +62,7 @@ const businessAddress = computed(() =>
 
     <tr v-if="showFirstSection && showSecondSection">
       <td style="padding: 16px 0">
-        <div :style="`border-top: 2px solid ${primaryColor};`"></div>
+        <div :style="`border-top: 2px solid ${signatureStore.themeOptions.color.primary};`"></div>
       </td>
     </tr>
 
