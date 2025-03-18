@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSubContent,
 } from './ui/dropdown-menu'
-import { faPalette, faSwatchbook, faTextSize } from '@fortawesome/pro-regular-svg-icons'
+import { faImage, faPalette, faSwatchbook, faTextSize } from '@fortawesome/pro-regular-svg-icons'
 import { Dialog, DialogTrigger } from './ui/dialog'
 import DialogContentColorPrimary from './ui/theme/DialogContentColorPrimary.vue'
 import { computed, ref, shallowRef, type Component } from 'vue'
@@ -21,6 +21,8 @@ import { useSignatureStore } from '@/stores/signature'
 import DialogContentColorSecondary from './ui/theme/DialogContentColorSecondary.vue'
 import DialogContentFontSizeBase from './ui/theme/DialogContentFontSizeBase.vue'
 import DialogContentFontSizeTitle from './ui/theme/DialogContentFontSizeTitle.vue'
+import DialogContentProfilePictureRadius from './ui/theme/DialogContentProfilePictureRadius.vue'
+import DialogContentProfilePictureWidth from './ui/theme/DialogContentProfilePictureWidth.vue'
 
 const signatureStore = useSignatureStore()
 
@@ -29,6 +31,8 @@ const availableDialogContents = {
   secondaryColor: shallowRef(DialogContentColorSecondary),
   fontSizeBase: shallowRef(DialogContentFontSizeBase),
   fontSizetitle: shallowRef(DialogContentFontSizeTitle),
+  profilePictureRadius: shallowRef(DialogContentProfilePictureRadius),
+  profilePictureWidth: shallowRef(DialogContentProfilePictureWidth),
 }
 
 const currentDialog = ref<Component>(availableDialogContents.primaryColor)
@@ -105,6 +109,37 @@ const textColor = computed(() =>
                   Base Font Size
                   <small class="text-slate-500">
                     {{ signatureStore.themeOptions.text.fontSize.base }}px
+                  </small>
+                </DropdownMenuItem>
+              </DialogTrigger>
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
+
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>
+            <span>
+              <FontAwesomeIcon :icon="faImage" fixed-width />
+              Images
+            </span>
+          </DropdownMenuSubTrigger>
+
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              <DialogTrigger as-child @click="setDialog('profilePictureWidth')">
+                <DropdownMenuItem class="items-center justify-between gap-x-3">
+                  Profile Picture Size
+                  <small class="text-slate-500">
+                    {{ signatureStore.themeOptions.image.personal.width }}px
+                  </small>
+                </DropdownMenuItem>
+              </DialogTrigger>
+
+              <DialogTrigger as-child @click="setDialog('profilePictureRadius')">
+                <DropdownMenuItem class="items-center justify-between gap-x-3">
+                  Profile Picture Border Radius
+                  <small class="text-slate-500">
+                    {{ signatureStore.themeOptions.image.personal.borderRadius }}px
                   </small>
                 </DropdownMenuItem>
               </DialogTrigger>
