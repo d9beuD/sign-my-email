@@ -67,8 +67,7 @@ export type Color = ColorHex | ColorRgb | ColorRgba | 'inherit'
 
 export interface ThemeImageOptions {
   width: number
-  rounded: boolean
-  borderRadius: number | 'full'
+  borderRadius: number
 }
 
 export interface ThemeOptions {

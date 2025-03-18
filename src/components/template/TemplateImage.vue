@@ -3,14 +3,14 @@ import { computed } from 'vue'
 
 interface Props {
   width: number
-  borderRadius: string
+  borderRadius: number
   src?: string
 }
 
 const props = defineProps<Props>()
 
 const imageStyle = computed(() => {
-  const style = `width: ${props.width}px;` + `border-radius: ${props.borderRadius}`
+  const style = `width: ${props.width}px;` + `border-radius: ${props.borderRadius}px`
   return style
 })
 </script>
