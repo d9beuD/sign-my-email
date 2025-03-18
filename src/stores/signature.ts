@@ -1,6 +1,7 @@
+import { templates } from '@/components/template'
 import type { Template, BusinessInfo, PersonalInfo, ThemeOptions } from '@/types'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 export const useSignatureStore = defineStore('signature', () => {
   const personalInfo = ref<PersonalInfo>({
@@ -23,10 +24,7 @@ export const useSignatureStore = defineStore('signature', () => {
     website: 'https://example.com',
   })
 
-  const template = ref<Template>({
-    name: '',
-    template: undefined,
-  })
+  const template = ref<Template>(templates[0])
 
   const themeOptions = ref<ThemeOptions>({
     color: {
