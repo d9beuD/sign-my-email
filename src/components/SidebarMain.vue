@@ -19,6 +19,26 @@ import { templates } from './template'
 
 const signatureStore = useSignatureStore()
 const availableTemplates = templates
+
+const onProfilePictureChange = (e: Event) => {
+  const input = e.target as HTMLInputElement
+  const files = input.files
+
+  if (null === files || files.length < 1) {
+    signatureStore.personalInfo.pictureUrl = `https://placehold.co/${signatureStore.personalInfo.pictureWidth}`
+    return
+  }
+
+  const reader = new FileReader()
+  reader.addEventListener(
+    'load',
+    () => {
+      signatureStore.personalInfo.pictureUrlTemp = reader.result as string
+    },
+    false,
+  )
+  reader.readAsDataURL(files[0])
+}
 </script>
 
 <template>
@@ -48,6 +68,16 @@ const availableTemplates = templates
     </SidebarSection>
 
     <SidebarSection :icon="faUser" title="Personal Info">
+      <FormGroup for="personalPicture" label="Profile Picture">
+        <Input
+          placeholder="Profile Picture"
+          id="personalPicture"
+          type="file"
+          accept="image/*"
+          @change="onProfilePictureChange"
+        />
+      </FormGroup>
+
       <FormGroup for="personalName" label="Name">
         <Input v-model="signatureStore.personalInfo.name" placeholder="Name" id="personalName" />
       </FormGroup>

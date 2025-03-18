@@ -57,5 +57,32 @@ export const useSignatureStore = defineStore('signature', () => {
     },
   })
 
+  watch(
+    [() => personalInfo.value.pictureUrlTemp, () => themeOptions.value.image.personal.width],
+    ([newUrl, newWidth]) => {
+      console.log('newUrl', newUrl)
+      console.log('newWidth', newWidth)
+
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+      const rawImage = new Image()
+
+      rawImage.src = newUrl as string
+
+      rawImage.onload = () => {
+        const cropWidth = themeOptions.value.image.personal.width
+        const cropHeight = themeOptions.value.image.personal.width
+        const startX = rawImage.width > rawImage.height ? (rawImage.width - rawImage.height) / 2 : 0
+        const startY = rawImage.height > rawImage.width ? (rawImage.height - rawImage.width) / 2 : 0
+        const size = Math.min(rawImage.width, rawImage.height)
+
+        canvas.width = cropWidth
+        canvas.height = cropHeight
+        ctx?.drawImage(rawImage, startX, startY, size, size, 0, 0, cropWidth, cropHeight)
+        personalInfo.value.pictureUrl = canvas.toDataURL()
+      }
+    },
+  )
+
   return { personalInfo, businessInfo, template, themeOptions }
 })
