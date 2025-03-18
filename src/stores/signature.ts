@@ -10,6 +10,7 @@ export const useSignatureStore = defineStore('signature', () => {
     jobTitle: 'Web Developer',
     email: 'john.doe@example.com',
     pictureUrl: 'https://placehold.co/100',
+    pictureUrlTemp: null,
     phoneNumbers: [],
     pictureWidth: 100,
   })
@@ -22,6 +23,7 @@ export const useSignatureStore = defineStore('signature', () => {
     New York NY,
     USA`,
     website: 'https://example.com',
+    pictureUrl: null,
   })
 
   const template = ref<Template>(templates[0])

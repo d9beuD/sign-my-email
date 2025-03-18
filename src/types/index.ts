@@ -13,12 +13,13 @@ export interface PersonalInfo {
   department?: string
   email?: string
   phoneNumbers: string[]
-  pictureUrl?: string
+  pictureUrl: string | null
+  pictureUrlTemp: string | null
   pictureWidth: number
 }
 
 export interface BusinessInfo {
-  pictureUrl?: string
+  pictureUrl: string | null
   pictureWidth: number
   companyName?: string
   address?: string

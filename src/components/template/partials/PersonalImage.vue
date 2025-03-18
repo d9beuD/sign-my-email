@@ -19,7 +19,7 @@ const borderRadius = computed(() => {
 
 <template>
   <TemplateImage
-    :src="signatureStore.personalInfo.pictureUrl"
+    :src="signatureStore.personalInfo.pictureUrl as string"
     :width="signatureStore.themeOptions.image.personal.width"
     :border-radius="borderRadius"
     alt=""

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useSignatureStore } from '@/stores/signature'
 import { computed } from 'vue'
 
 interface Props {
@@ -8,7 +7,6 @@ interface Props {
   src?: string
 }
 
-const signatureStore = useSignatureStore()
 const props = defineProps<Props>()
 
 const imageStyle = computed(() => {
@@ -18,5 +16,5 @@ const imageStyle = computed(() => {
 </script>
 
 <template>
-  <img :src="signatureStore.personalInfo.pictureUrl" alt="" :style="imageStyle" />
+  <img :src="props.src" alt="" :style="imageStyle" />
 </template>
