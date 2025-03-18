@@ -9,7 +9,7 @@ export const useSignatureStore = defineStore('signature', () => {
     department: 'IT Department',
     jobTitle: 'Web Developer',
     email: 'john.doe@example.com',
-    pictureUrl: 'https://placehold.co/400',
+    pictureUrl: 'https://placehold.co/100',
     phoneNumbers: [],
     pictureWidth: 100,
   })
