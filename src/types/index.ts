@@ -64,6 +64,12 @@ export type ColorRgb = `rgb(${number}, ${number}, ${number})`
 export type ColorRgba = `rgb(${number}, ${number}, ${number}, ${number})`
 export type Color = ColorHex | ColorRgb | ColorRgba | 'inherit'
 
+export interface ThemeImageOptions {
+  width: number
+  rounded: boolean
+  borderRadius: number | 'full'
+}
+
 export interface ThemeOptions {
   color: {
     primary: ColorHex
@@ -77,9 +83,8 @@ export interface ThemeOptions {
     }
   }
   image: {
-    width: number
-    rounded: boolean
-    borderRadius: number | 'full'
+    personal: ThemeImageOptions
+    business: ThemeImageOptions
   }
   separator: {
     width: number

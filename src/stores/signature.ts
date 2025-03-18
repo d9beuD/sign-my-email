@@ -41,9 +41,16 @@ export const useSignatureStore = defineStore('signature', () => {
       },
     },
     image: {
-      width: 0,
-      rounded: false,
-      borderRadius: 0,
+      personal: {
+        width: 100,
+        rounded: false,
+        borderRadius: 0,
+      },
+      business: {
+        width: 200,
+        rounded: false,
+        borderRadius: 0,
+      },
     },
     separator: {
       width: 2,
