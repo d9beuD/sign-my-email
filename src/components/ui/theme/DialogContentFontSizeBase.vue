@@ -9,7 +9,7 @@ import {
   NumberFieldInput,
 } from '../number-field'
 
-const SignatureStore = useSignatureStore()
+const signatureStore = useSignatureStore()
 </script>
 
 <template>
@@ -21,7 +21,7 @@ const SignatureStore = useSignatureStore()
       </DialogDescription>
     </DialogHeader>
 
-    <NumberField v-model="SignatureStore.themeOptions.text.fontSize.base" :min="10">
+    <NumberField v-model="signatureStore.themeOptions.text.fontSize.base" :min="10">
       <NumberFieldContent>
         <NumberFieldDecrement />
         <NumberFieldInput />

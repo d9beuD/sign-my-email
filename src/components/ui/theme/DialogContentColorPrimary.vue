@@ -3,7 +3,7 @@ import { useSignatureStore } from '@/stores/signature'
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../dialog'
 import { Input } from '../input'
 
-const SignatureStore = useSignatureStore()
+const signatureStore = useSignatureStore()
 </script>
 
 <template>
@@ -15,6 +15,6 @@ const SignatureStore = useSignatureStore()
       </DialogDescription>
     </DialogHeader>
 
-    <Input type="color" v-model="SignatureStore.themeOptions.color.primary" />
+    <Input type="color" v-model="signatureStore.themeOptions.color.primary" />
   </DialogContent>
 </template>
