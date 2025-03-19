@@ -22,7 +22,9 @@ const phoneUrl = (number: string) => number.replace(/(?: )/g, '')
         <FontAwesomeIcon :icon="faEnvelope" fixed-width />
       </template>
 
-      {{ signatureStore.personalInfo.email }}
+      <a :href="`mailto:${signatureStore.personalInfo.email}`">
+        {{ signatureStore.personalInfo.email }}
+      </a>
     </TemplateTextDecorated>
   </div>
 
