@@ -3,7 +3,8 @@ import { useSignatureStore } from '@/stores/signature'
 import { computed } from 'vue'
 
 const signatureStore = useSignatureStore()
-const resetLinks = '<style>.reset-links a { text-decoration: none !important; }</style>'
+const resetLinks =
+  '<style>.reset-links a { text-decoration: none !important; color: inherit }</style>'
 const textColor = computed(() =>
   signatureStore.themeOptions.color.secondaryUnset
     ? 'inherit'
