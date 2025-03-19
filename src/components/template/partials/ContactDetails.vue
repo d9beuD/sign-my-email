@@ -16,7 +16,7 @@ const businessAddress = computed(() =>
   <div v-if="signatureStore.personalInfo.email" style="margin-bottom: 8px">
     <TemplateTextDecorated>
       <template #icon>
-        <FontAwesomeIcon :icon="faLocationDot" fixed-width />
+        <FontAwesomeIcon :icon="faEnvelope" fixed-width />
       </template>
 
       {{ signatureStore.personalInfo.email }}
@@ -25,7 +25,7 @@ const businessAddress = computed(() =>
   <div v-if="signatureStore.businessInfo.address" style="margin-bottom: 8px">
     <TemplateTextDecorated>
       <template #icon>
-        <FontAwesomeIcon :icon="faEnvelope" fixed-width />
+        <FontAwesomeIcon :icon="faLocationDot" fixed-width />
       </template>
 
       <div v-html="businessAddress"></div>
