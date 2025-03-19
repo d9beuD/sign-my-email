@@ -1,3 +1,4 @@
+import type { phoneIcons } from '@/components/template'
 import type { Component } from 'vue'
 
 export interface MailSignature {
@@ -12,7 +13,7 @@ export interface PersonalInfo {
   jobTitle?: string
   department?: string
   email?: string
-  phoneNumbers: string[]
+  phoneNumbers: phoneNumber[]
   pictureUrl: string | null
   pictureUrlTemp: string | null
   pictureWidth: number
@@ -53,6 +54,11 @@ export enum SocialMediaType {
 export interface SocialMedia {
   type: SocialMediaType
   url?: string
+}
+
+export interface phoneNumber {
+  number: string
+  type: keyof typeof phoneIcons
 }
 
 export interface Template {

@@ -11,7 +11,7 @@ export const useSignatureStore = defineStore('signature', () => {
     email: 'john.doe@example.com',
     pictureUrl: 'https://placehold.co/100',
     pictureUrlTemp: null,
-    phoneNumbers: [],
+    phoneNumbers: [{ number: '+33 6 12 34 56 78', type: 'mobile' }],
     pictureWidth: 100,
   })
 

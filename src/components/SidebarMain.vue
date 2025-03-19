@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { useSignatureStore } from '@/stores/signature'
-import { faShapes, faSignature, faSuitcase, faUser } from '@fortawesome/pro-regular-svg-icons'
+import {
+  faMinusCircle,
+  faPlusCircle,
+  faShapes,
+  faSignature,
+  faSuitcase,
+  faUser,
+} from '@fortawesome/pro-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
@@ -15,7 +22,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select'
-import { templates } from './template'
+import { phoneIcons, templates } from './template'
+import { Button } from './ui/button'
 
 const signatureStore = useSignatureStore()
 const availableTemplates = templates
@@ -39,6 +47,12 @@ const onProfilePictureChange = (e: Event) => {
   )
   reader.readAsDataURL(files[0])
 }
+
+const deletePhoneNumber = (index: number) =>
+  signatureStore.personalInfo.phoneNumbers.splice(index, 1)
+
+const addPhoneNumber = () =>
+  signatureStore.personalInfo.phoneNumbers.push({ type: 'phone', number: '' })
 </script>
 
 <template>
@@ -105,6 +119,63 @@ const onProfilePictureChange = (e: Event) => {
           id="personalEmailAddress"
           type="email"
         />
+      </FormGroup>
+
+      <FormGroup label="Telephone Numbers">
+        <div class="flex flex-col">
+          <div
+            v-for="(phone, index) in signatureStore.personalInfo.phoneNumbers"
+            :key="index"
+            class="group flex"
+          >
+            <div class="w-4/12">
+              <Select v-model="phone.type">
+                <SelectTrigger
+                  class="gap-x-2 rounded-r-none group-[&:not(:first-child)]:rounded-t-none group-[&:not(:last-child)]:rounded-b-none group-[&:not(:first-child)]:border-t-0"
+                >
+                  <SelectValue placeholder="Icon" />
+                </SelectTrigger>
+
+                <SelectContent>
+                  <SelectItem
+                    v-for="(icon, key, index) in phoneIcons"
+                    :key="key + index"
+                    :value="key"
+                  >
+                    <FontAwesomeIcon :icon="phoneIcons[key]" fixed-width />
+                    <span class="sr-only">{{
+                      key.charAt(0).toUpperCase() + key.slice(1).toLowerCase()
+                    }}</span>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <Input
+              v-model="phone.number"
+              class="w-8/12 rounded-l-none border-l-0 group-[&:not(:first-child)]:rounded-t-none group-[&:not(:last-child)]:rounded-b-none group-[&:not(:first-child)]:border-t-0"
+            />
+
+            <Button
+              variant="link"
+              size="icon"
+              class="rounded-full px-4 text-destructive hover:text-destructive/80"
+              @click="deletePhoneNumber(index)"
+            >
+              <FontAwesomeIcon :icon="faMinusCircle" fixed-width />
+            </Button>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <Button
+            variant="link"
+            size="icon"
+            class="rounded-full px-4 text-green-600 hover:text-green-600/80"
+            @click="addPhoneNumber"
+          >
+            <FontAwesomeIcon :icon="faPlusCircle" fixed-width />
+          </Button>
+        </div>
       </FormGroup>
     </SidebarSection>
 

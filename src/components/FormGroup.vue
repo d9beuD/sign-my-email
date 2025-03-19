@@ -3,10 +3,12 @@ import { Label } from './ui/label'
 
 interface Props {
   label: string
-  for: string
+  for?: string
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  for: '',
+})
 </script>
 
 <template>
