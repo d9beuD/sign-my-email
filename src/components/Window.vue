@@ -6,9 +6,9 @@ import WindowHeader from './WindowHeader.vue'
 
 <template>
   <div
-    class="h-full overflow-auto rounded-tl-xl border-s border-t bg-background shadow-2xl dark:bg-zinc-800"
+    class="flex h-full flex-col overflow-auto rounded-tl-xl border-s border-t bg-background shadow-2xl dark:bg-zinc-800"
   >
-    <WindowHeader />
-    <WindowBody />
+    <WindowHeader class="sticky top-0" />
+    <WindowBody class="flex-auto grow overflow-auto pb-4" />
   </div>
 </template>
