@@ -62,11 +62,6 @@ jobs:
           echo "Attempt to whitelist IP..."
           curl -H "Authorization: $AUTH_STR" -H "X-CPANEL-OTP: $OTP" -sX POST -d 'whitelist[address]=${{ steps.ip.outputs.ipv4 }}' -d 'whitelist[port]=22' "https://${{ secrets.O2SWITCH_HOST }}:2083/$ENDPOINT?r=add" | jq
 
-      - uses: tecolicom/actions-use-apt-tools@v1
-        with:
-          tools: oathtool gnupg2
-          method: timestamp
-
       - name: Deploy
         uses: easingthemes/ssh-deploy@v5.1.0
         with:
