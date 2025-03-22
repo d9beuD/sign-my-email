@@ -11,7 +11,7 @@ const signatureStore = useSignatureStore()
 
 const dividerStyle = computed(() => {
   const borderSide = props.orientation === 'horizontal' ? 'top' : 'left'
-  return `border-${borderSide}: ${signatureStore.themeOptions.separator.width}px solid ${signatureStore.themeOptions.color.primary}`
+  return `border-${borderSide}: ${signatureStore.themeOptions.divider.width}px solid ${signatureStore.themeOptions.color.primary}`
 })
 </script>
 

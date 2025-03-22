@@ -12,7 +12,13 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSubContent,
 } from './ui/dropdown-menu'
-import { faImage, faPalette, faSwatchbook, faTextSize } from '@fortawesome/pro-regular-svg-icons'
+import {
+  faHorizontalRule,
+  faImage,
+  faPalette,
+  faSwatchbook,
+  faTextSize,
+} from '@fortawesome/pro-regular-svg-icons'
 import { Dialog, DialogTrigger } from './ui/dialog'
 import DialogContentColorPrimary from './ui/theme/DialogContentColorPrimary.vue'
 import { computed, ref, shallowRef, type Component } from 'vue'
@@ -23,6 +29,7 @@ import DialogContentFontSizeBase from './ui/theme/DialogContentFontSizeBase.vue'
 import DialogContentFontSizeTitle from './ui/theme/DialogContentFontSizeTitle.vue'
 import DialogContentProfilePictureRadius from './ui/theme/DialogContentProfilePictureRadius.vue'
 import DialogContentProfilePictureWidth from './ui/theme/DialogContentProfilePictureWidth.vue'
+import DialogContentDividerWidth from './ui/theme/DialogContentDividerWidth.vue'
 
 const signatureStore = useSignatureStore()
 
@@ -33,6 +40,7 @@ const availableDialogContents = {
   fontSizetitle: shallowRef(DialogContentFontSizeTitle),
   profilePictureRadius: shallowRef(DialogContentProfilePictureRadius),
   profilePictureWidth: shallowRef(DialogContentProfilePictureWidth),
+  dividerWidth: shallowRef(DialogContentDividerWidth),
 }
 
 const currentDialog = ref<Component>(availableDialogContents.primaryColor)
@@ -126,9 +134,12 @@ const textColor = computed(() =>
 
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
+              <DropdownMenuLabel>Profile Picture</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+
               <DialogTrigger as-child @click="setDialog('profilePictureWidth')">
                 <DropdownMenuItem class="items-center justify-between gap-x-3">
-                  Profile Picture Size
+                  Width
                   <small class="text-slate-500">
                     {{ signatureStore.themeOptions.image.personal.width }}px
                   </small>
@@ -137,9 +148,31 @@ const textColor = computed(() =>
 
               <DialogTrigger as-child @click="setDialog('profilePictureRadius')">
                 <DropdownMenuItem class="items-center justify-between gap-x-3">
-                  Profile Picture Border Radius
+                  Border Radius
                   <small class="text-slate-500">
                     {{ signatureStore.themeOptions.image.personal.borderRadius }}px
+                  </small>
+                </DropdownMenuItem>
+              </DialogTrigger>
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
+
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>
+            <span>
+              <FontAwesomeIcon :icon="faHorizontalRule" fixed-width />
+              Dividers
+            </span>
+          </DropdownMenuSubTrigger>
+
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              <DialogTrigger as-child @click="setDialog('dividerWidth')">
+                <DropdownMenuItem class="items-center justify-between gap-x-3">
+                  Width
+                  <small class="text-slate-500">
+                    {{ signatureStore.themeOptions.divider.width }}px
                   </small>
                 </DropdownMenuItem>
               </DialogTrigger>

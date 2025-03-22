@@ -92,7 +92,7 @@ export interface ThemeOptions {
     personal: ThemeImageOptions
     business: ThemeImageOptions
   }
-  separator: {
+  divider: {
     width: number
   }
 }

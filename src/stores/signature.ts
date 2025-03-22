@@ -50,7 +50,7 @@ export const useSignatureStore = defineStore('signature', () => {
         borderRadius: 0,
       },
     },
-    separator: {
+    divider: {
       width: 2,
     },
   })
