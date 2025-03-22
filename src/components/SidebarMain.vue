@@ -4,7 +4,6 @@ import {
   faMinusCircle,
   faPlusCircle,
   faShapes,
-  faSignature,
   faSuitcase,
   faUser,
 } from '@fortawesome/pro-regular-svg-icons'
@@ -24,6 +23,7 @@ import {
 } from './ui/select'
 import { phoneIcons, templates } from './template'
 import { Button } from './ui/button'
+import AppIcon from '@/icons/AppIcon.vue'
 
 const signatureStore = useSignatureStore()
 const availableTemplates = templates
@@ -58,7 +58,7 @@ const addPhoneNumber = () =>
 <template>
   <div class="flex flex-col space-y-4">
     <h1 class="flex items-center gap-x-2 text-lg font-bold text-primary">
-      <FontAwesomeIcon :icon="faSignature" size="lg" />
+      <AppIcon class="size-8" />
       <span>Sign My Email</span>
     </h1>
 
