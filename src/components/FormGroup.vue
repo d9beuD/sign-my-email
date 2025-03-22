@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div class="mb-4">
+  <div class="[&:not(:last-child)]:mb-4">
     <Label :for="props.for">{{ props.label }}</Label>
     <slot></slot>
   </div>

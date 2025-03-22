@@ -1,3 +1,4 @@
+<!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <script setup lang="ts">
 import { cn } from '@/lib/utils'
 import { ChevronDown } from 'lucide-vue-next'
@@ -18,14 +19,16 @@ const forwardedProps = useForwardProps(delegatedProps)
 <template>
   <SelectTrigger
     v-bind="forwardedProps"
-    :class="cn(
-      'flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate text-start',
-      props.class,
-    )"
+    :class="
+      cn(
+        'flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-background px-3 py-2 text-start text-sm shadow-sm ring-offset-background focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-muted-foreground [&>span]:truncate',
+        props.class,
+      )
+    "
   >
     <slot />
     <SelectIcon as-child>
-      <ChevronDown class="w-4 h-4 opacity-50 shrink-0" />
+      <ChevronDown class="h-4 w-4 shrink-0 opacity-50" />
     </SelectIcon>
   </SelectTrigger>
 </template>

@@ -11,14 +11,12 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <section>
+  <section class="rounded bg-accent p-2">
     <h2 class="mb-2 flex items-center gap-x-3">
       <FontAwesomeIcon :icon="props.icon" size="lg" fixed-width />
       {{ props.title }}
     </h2>
 
-    <div class="ml-0 rounded-tl border-l border-t border-primary pl-4 pt-2">
-      <slot></slot>
-    </div>
+    <slot></slot>
   </section>
 </template>
