@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MailWindow from './components/Window.vue'
 import SidebarMain from './components/SidebarMain.vue'
+import { Toaster } from './components/ui/sonner'
 </script>
 
 <template>
@@ -17,4 +18,6 @@ import SidebarMain from './components/SidebarMain.vue'
       </div>
     </div>
   </div>
+
+  <Toaster position="top-right" rich-colors />
 </template>

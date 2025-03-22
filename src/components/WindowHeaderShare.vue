@@ -2,6 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faShare } from '@fortawesome/pro-regular-svg-icons'
 import { Button } from './ui/button'
+import { toast } from 'vue-sonner'
 
 const share = () => {
   const source = document.querySelector('#rendered-signature')
@@ -64,6 +65,8 @@ const share = () => {
 
   // Remove clone before leaving
   document.body.removeChild(div)
+
+  toast.success('Signature has been copied to your clipboard!')
 }
 </script>
 
