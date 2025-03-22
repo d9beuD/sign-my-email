@@ -68,8 +68,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           # Updates are based on file hash, not time + size
           ARGS: '-rlgoDzvc -i --delete'
-          SOURCE: './'
+          SOURCE: './dist/'
           REMOTE_HOST: ${{ secrets.O2SWITCH_HOST }}
           REMOTE_USER: ${{ secrets.O2SWITCH_USER }}
           TARGET: ${{ secrets.APP_PATH }}/
-          EXCLUDE: '.git*, public/assets/upload/*'
