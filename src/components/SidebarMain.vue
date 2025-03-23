@@ -25,29 +25,24 @@ import { phoneIcons, socialMedias, templates } from './template'
 import { Button } from './ui/button'
 import AppIcon from '@/icons/AppIcon.vue'
 import { SocialMediaType } from '@/types'
+import { convertImageToDataURL } from '@/lib/utils'
 
 const signatureStore = useSignatureStore()
 const availableTemplates = templates
 
-const onProfilePictureChange = (e: Event) => {
+const handlePictureChange = async (e: Event) => {
   const input = e.target as HTMLInputElement
   const files = input.files
 
   if (null === files || files.length < 1) {
-    signatureStore.personalInfo.pictureUrl = `https://placehold.co/${signatureStore.personalInfo.pictureWidth}`
-    return
+    return null
   }
 
-  const reader = new FileReader()
-  reader.addEventListener(
-    'load',
-    () => {
-      signatureStore.personalInfo.pictureUrlTemp = reader.result as string
-    },
-    false,
-  )
-  reader.readAsDataURL(files[0])
+  return await convertImageToDataURL(files[0])
 }
+
+const onProfilePictureChange = async (e: Event) =>
+  (signatureStore.personalInfo.pictureUrlTemp = await handlePictureChange(e))
 
 const deletePhoneNumber = (index: number) =>
   signatureStore.personalInfo.phoneNumbers.splice(index, 1)
