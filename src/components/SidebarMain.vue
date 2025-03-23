@@ -21,9 +21,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select'
-import { phoneIcons, templates } from './template'
+import { phoneIcons, socialMedias, templates } from './template'
 import { Button } from './ui/button'
 import AppIcon from '@/icons/AppIcon.vue'
+import { SocialMediaType } from '@/types'
 
 const signatureStore = useSignatureStore()
 const availableTemplates = templates
@@ -53,6 +54,12 @@ const deletePhoneNumber = (index: number) =>
 
 const addPhoneNumber = () =>
   signatureStore.personalInfo.phoneNumbers.push({ type: 'phone', number: '' })
+
+const deleteSocialMedia = (index: number) =>
+  signatureStore.businessInfo.socialMedias.splice(index, 1)
+
+const addSocialMedia = () =>
+  signatureStore.businessInfo.socialMedias.push({ type: SocialMediaType.Airbnb, url: '' })
 </script>
 
 <template>
@@ -203,6 +210,64 @@ const addPhoneNumber = () =>
           placeholder="Website"
           id="businessWebsite"
         />
+      </FormGroup>
+
+      <FormGroup label="Social Networks">
+        <div class="flex flex-col">
+          <div
+            v-for="(socialMedia, index) in signatureStore.businessInfo.socialMedias"
+            :key="index"
+            class="group flex"
+          >
+            <div class="">
+              <Select v-model="socialMedia.type">
+                <SelectTrigger
+                  class="gap-x-2 rounded-r-none group-[&:not(:first-child)]:rounded-t-none group-[&:not(:last-child)]:rounded-b-none group-[&:not(:first-child)]:border-t-0"
+                >
+                  <SelectValue placeholder="Icon" />
+                </SelectTrigger>
+
+                <SelectContent>
+                  <SelectItem
+                    v-for="(value, key, index) in socialMedias"
+                    :key="key + index"
+                    :value="key"
+                  >
+                    <div class="flex items-center gap-x-2">
+                      <FontAwesomeIcon :icon="value.icon" fixed-width />
+                      <span>{{ value.name }}</span>
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <Input
+              v-model="socialMedia.url"
+              class="w-8/12 grow rounded-l-none border-l-0 group-[&:not(:first-child)]:rounded-t-none group-[&:not(:last-child)]:rounded-b-none group-[&:not(:first-child)]:border-t-0"
+              placeholder="https://..."
+            />
+
+            <Button
+              variant="link"
+              size="icon"
+              class="rounded-full px-4 text-destructive hover:text-destructive/80"
+              @click="deleteSocialMedia(index)"
+            >
+              <FontAwesomeIcon :icon="faMinusCircle" fixed-width />
+            </Button>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <Button
+            variant="link"
+            size="icon"
+            class="rounded-full px-4 text-green-600 hover:text-green-600/80"
+            @click="addSocialMedia"
+          >
+            <FontAwesomeIcon :icon="faPlusCircle" fixed-width />
+          </Button>
+        </div>
       </FormGroup>
     </SidebarSection>
   </div>

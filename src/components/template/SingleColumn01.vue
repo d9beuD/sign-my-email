@@ -9,6 +9,7 @@ import TemplateDivider from './TemplateDivider.vue'
 import PersonalImage from './partials/PersonalImage.vue'
 import DesignationInfo from './partials/DesignationInfo.vue'
 import ContactDetails from './partials/ContactDetails.vue'
+import SocialMedias from './partials/SocialMedias.vue'
 
 const signatureStore = useSignatureStore()
 
@@ -26,6 +27,7 @@ const showSecondSection = computed(
     signatureStore.businessInfo.website ||
     signatureStore.businessInfo.address,
 )
+const showThirdSection = computed(() => signatureStore.businessInfo.socialMedias.length)
 </script>
 
 <template>
@@ -39,7 +41,9 @@ const showSecondSection = computed(
       </TemplateColumn>
     </TemplateRow>
 
-    <TemplateRow v-if="showFirstSection && showSecondSection">
+    <TemplateRow
+      v-if="(showFirstSection && showSecondSection) || (showFirstSection && showThirdSection)"
+    >
       <TemplateColumn style="padding: 16px 0">
         <TemplateDivider orientation="horizontal" />
       </TemplateColumn>
@@ -49,6 +53,16 @@ const showSecondSection = computed(
       <TemplateColumn>
         <ContactDetails />
       </TemplateColumn>
+    </TemplateRow>
+
+    <TemplateRow v-if="showSecondSection && showThirdSection">
+      <TemplateColumn style="padding: 16px 0">
+        <TemplateDivider orientation="horizontal" />
+      </TemplateColumn>
+    </TemplateRow>
+
+    <TemplateRow v-if="showThirdSection">
+      <SocialMedias />
     </TemplateRow>
   </TemplateBase>
 </template>
