@@ -26,3 +26,48 @@ export const convertImageToDataURL = (image: File) =>
 
     reader.readAsDataURL(image)
   })
+
+/**
+ * Resize and crop an image from a data URL.
+ */
+export const cropImageFromDataURL = (dataURL: string, width: number, keepRatio: boolean = true) =>
+  new Promise<string>((resolve) => {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    const rawImage = new Image()
+
+    rawImage.src = dataURL as string
+
+    rawImage.onload = () => {
+      const factor = rawImage.width / width
+      const cropWidth = width
+      const cropHeight = keepRatio ? rawImage.height / factor : width
+
+      const startX = keepRatio
+        ? 0
+        : rawImage.width > rawImage.height
+          ? (rawImage.width - rawImage.height) / 2
+          : 0
+      const startY = keepRatio
+        ? 0
+        : rawImage.height > rawImage.width
+          ? (rawImage.height - rawImage.width) / 2
+          : 0
+      const sizeX = keepRatio
+        ? rawImage.width
+        : rawImage.width > rawImage.height
+          ? rawImage.height
+          : rawImage.width
+      const sizeY = keepRatio
+        ? rawImage.height
+        : rawImage.height > rawImage.width
+          ? rawImage.width
+          : rawImage.height
+
+      canvas.width = cropWidth
+      canvas.height = cropHeight
+      ctx?.drawImage(rawImage, startX, startY, sizeX, sizeY, 0, 0, cropWidth, cropHeight)
+
+      resolve(canvas.toDataURL())
+    }
+  })
