@@ -11,7 +11,7 @@ import WindowHeaderTheme from './WindowHeaderTheme.vue'
   >
     <WindowHeaderDots />
     <WindowHeaderSend />
-    <div>
+    <div class="flex">
       <WindowHeaderTheme />
       <WindowHeaderShare />
     </div>

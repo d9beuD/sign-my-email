@@ -5,8 +5,8 @@ import { Toaster } from './components/ui/sonner'
 </script>
 
 <template>
-  <div id="app-container" class="flex h-dvh w-dvw bg-blue-100 dark:bg-blue-950">
-    <div class="h-full max-h-full w-96 overflow-auto border-r bg-background">
+  <div id="app-container" class="flex h-dvh w-dvw flex-nowrap">
+    <div class="h-full max-h-full w-96 min-w-96 overflow-auto border-r bg-background">
       <div class="p-4">
         <SidebarMain />
       </div>
