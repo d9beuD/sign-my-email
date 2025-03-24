@@ -71,3 +71,87 @@ export const cropImageFromDataURL = (dataURL: string, width: number, keepRatio: 
       resolve(canvas.toDataURL())
     }
   })
+
+export const downloadFile = (filename: string, data: string) => {
+  const blob = new Blob([data], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+
+  a.href =
+    typeof URL.createObjectURL === 'function'
+      ? URL.createObjectURL(blob)
+      : window.webkitURL.createObjectURL(blob)
+  a.download = filename
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+export const sanitizeSignature = (signature: Element): Element => {
+  // Clone to avoid editing source
+  const clone = signature.cloneNode(true)
+  const div = document.createElement('div')
+
+  // Give the div an ID to query it later
+  div.setAttribute('id', 'temp-rendered-signature')
+  div.style.display = 'none'
+  div.append(clone)
+
+  document.body.append(div)
+
+  const icons = document.querySelectorAll('#temp-rendered-signature svg.svg-inline--fa')
+
+  icons.forEach((icon) => {
+    const styles = window.getComputedStyle(icon)
+    let styleString = ''
+
+    for (let i = 0; i < styles.length; i++) {
+      const property = styles[i]
+
+      // Exclude some styles to reduce signature size
+      if (
+        property.startsWith('-') ||
+        property.startsWith('animation') ||
+        property.startsWith('background') ||
+        property.startsWith('border') ||
+        property.startsWith('column') ||
+        property.startsWith('contain') ||
+        property.startsWith('counter') ||
+        property.startsWith('grid') ||
+        property.startsWith('mask') ||
+        property.startsWith('over') ||
+        property.startsWith('scroll') ||
+        property.startsWith('shape') ||
+        property.startsWith('stroke') ||
+        property.startsWith('trans')
+      ) {
+        continue
+      }
+
+      styleString += `${property}:${styles.getPropertyValue(property)};`
+    }
+
+    icon.setAttribute('style', styleString)
+  })
+
+  return document.querySelector('#temp-rendered-signature') as Element
+}
+
+export const copySignature = (signature: Element, deleteAfter: boolean = true) =>
+  new Promise<void>((resolve) => {
+    // Put the signature HTML into a blob so it can be pasted and interpreted as HTML by mail clients
+    const clipboardItem = new ClipboardItem({
+      'text/html': new Blob([signature.firstElementChild?.innerHTML ?? ''], { type: 'text/html' }),
+      'text/plain': new Blob([signature.firstElementChild?.innerHTML ?? ''], {
+        type: 'text/plain',
+      }),
+    })
+
+    navigator.clipboard.write([clipboardItem])
+
+    // Remove clone before leaving
+    if (deleteAfter) {
+      document.body.removeChild(signature)
+    }
+
+    resolve()
+  })

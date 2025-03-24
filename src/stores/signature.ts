@@ -56,6 +56,19 @@ export const useSignatureStore = defineStore('signature', () => {
     },
   })
 
+  const exportableSignature = computedAsync(async () => {
+    return JSON.stringify({
+      personalInfo: { ...personalInfo.value },
+      businessInfo: { ...businessInfo.value },
+      template: template.value,
+      themeOptions: { ...themeOptions.value },
+    }) as string
+  })
+
+  const exportableTheme = computedAsync(async () => {
+    return JSON.stringify({ ...themeOptions.value }) as string
+  })
+
   watch(
     [() => personalInfo.value.pictureUrlTemp, () => themeOptions.value.image.personal.width],
     async ([newUrl, newWidth]) => {
@@ -78,5 +91,12 @@ export const useSignatureStore = defineStore('signature', () => {
     },
   )
 
-  return { personalInfo, businessInfo, template, themeOptions }
+  return {
+    personalInfo,
+    businessInfo,
+    template,
+    themeOptions,
+    exportableSignature,
+    exportableTheme,
+  }
 })
