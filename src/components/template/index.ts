@@ -1,8 +1,8 @@
-import type { Template } from '@/types'
+import { Templates, type TemplateList } from '@/types'
 import { SocialMediaType } from '@/types'
 import SingleColumn01 from './SingleColumn01.vue'
 import SingleColumn02 from './SingleColumn02.vue'
-import { markRaw } from 'vue'
+import { markRaw, type Component } from 'vue'
 import {
   faMobile,
   faPhone,
@@ -31,10 +31,9 @@ import {
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons'
 
-export const templates: Template[] = [
-  { name: 'Single Column 01', template: markRaw(SingleColumn01) },
-  { name: 'Single Column 02', template: markRaw(SingleColumn02) },
-]
+export const templates: TemplateList = {
+  [Templates.SignleColumn01]: { name: 'Single Column 01', template: markRaw(SingleColumn01) },
+}
 
 export const phoneIcons = {
   phone: faPhone,

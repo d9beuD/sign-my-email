@@ -1,6 +1,7 @@
 import { templates } from '@/components/template'
 import { cropImageFromDataURL } from '@/lib/utils'
-import type { Template, BusinessInfo, PersonalInfo, ThemeOptions } from '@/types'
+import type { BusinessInfo, PersonalInfo, ThemeOptions, MailSignature, Templates } from '@/types'
+import { computedAsync } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 
@@ -26,7 +27,7 @@ export const useSignatureStore = defineStore('signature', () => {
     pictureUrlTemp: null,
   })
 
-  const template = ref<Template>(templates[0])
+  const template = ref<Templates | null>(null)
 
   const themeOptions = ref<ThemeOptions>({
     color: {

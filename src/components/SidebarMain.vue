@@ -77,8 +77,8 @@ const addSocialMedia = () =>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Templates</SelectLabel>
-              <template v-for="template in availableTemplates" :key="template.name">
-                <SelectItem :value="template">{{ template.name }}</SelectItem>
+              <template v-for="(template, index) in availableTemplates" :key="index">
+                <SelectItem :value="index">{{ template.name }}</SelectItem>
               </template>
             </SelectGroup>
           </SelectContent>
