@@ -19,9 +19,7 @@ export const useSignatureStore = defineStore('signature', () => {
   const businessInfo = ref<BusinessInfo>({
     socialMedias: [],
     companyName: 'F Society Inc.',
-    address: `123 5th Street,
-    New York NY,
-    USA`,
+    address: `123 5th Street,\n` + 'New York NY,\n' + 'USA',
     website: 'https://example.com',
     pictureUrl: 'https://placehold.co/200x50',
     pictureUrlTemp: null,
