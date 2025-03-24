@@ -6,6 +6,7 @@ import {
   faShapes,
   faSuitcase,
   faUser,
+  faXmarkCircle,
 } from '@fortawesome/pro-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Input } from './ui/input'
@@ -58,6 +59,16 @@ const deleteSocialMedia = (index: number) =>
 
 const addSocialMedia = () =>
   signatureStore.businessInfo.socialMedias.push({ type: SocialMediaType.Airbnb, url: '' })
+
+const clearProfileImage = () => {
+  signatureStore.personalInfo.pictureUrl = null
+  signatureStore.personalInfo.pictureUrlTemp = null
+}
+
+const clearBusinessImage = () => {
+  signatureStore.businessInfo.pictureUrl = null
+  signatureStore.businessInfo.pictureUrlTemp = null
+}
 </script>
 
 <template>
@@ -88,13 +99,24 @@ const addSocialMedia = () =>
 
     <SidebarSection :icon="faUser" title="Personal Info">
       <FormGroup for="personalPicture" label="Profile Picture">
-        <Input
-          placeholder="Profile Picture"
-          id="personalPicture"
-          type="file"
-          accept="image/*"
-          @change="onProfilePictureChange"
-        />
+        <div class="flex">
+          <Input
+            placeholder="Profile Picture"
+            id="personalPicture"
+            type="file"
+            accept="image/*"
+            @change="onProfilePictureChange"
+          />
+          <Button
+            variant="link"
+            size="icon"
+            class="rounded-full px-4"
+            aria-label="Clear image"
+            @click="clearProfileImage"
+          >
+            <FontAwesomeIcon :icon="faXmarkCircle" />
+          </Button>
+        </div>
       </FormGroup>
 
       <FormGroup for="personalName" label="Name">
@@ -190,13 +212,24 @@ const addSocialMedia = () =>
 
     <SidebarSection :icon="faSuitcase" title="Business Info">
       <FormGroup for="businessPicture" label="Business Picture">
-        <Input
-          placeholder="Business Picture"
-          id="businessPicture"
-          type="file"
-          accept="image/*"
-          @change="onBusinessPictureChange"
-        />
+        <div class="flex">
+          <Input
+            placeholder="Business Picture"
+            id="businessPicture"
+            type="file"
+            accept="image/*"
+            @change="onBusinessPictureChange"
+          />
+          <Button
+            variant="link"
+            size="icon"
+            class="rounded-full px-4"
+            aria-label="Clear image"
+            @click="clearBusinessImage"
+          >
+            <FontAwesomeIcon :icon="faXmarkCircle" />
+          </Button>
+        </div>
       </FormGroup>
 
       <FormGroup for="businessName" label="Company Name">

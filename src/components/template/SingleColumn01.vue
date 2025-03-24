@@ -73,11 +73,9 @@ const showFirstDivider = computed<boolean>(
 
     <!-- Third Section -->
     <template v-if="showThirdSection">
-      <TemplateRow>
+      <TemplateRow v-if="signatureStore.businessInfo.pictureUrl">
         <TemplateColumn>
-          <div v-if="signatureStore.businessInfo.pictureUrl">
-            <BusinessImage />
-          </div>
+          <BusinessImage />
           <div
             v-if="signatureStore.businessInfo.socialMedias.length"
             style="padding-bottom: 16px"
