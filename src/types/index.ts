@@ -16,12 +16,11 @@ export interface PersonalInfo {
   phoneNumbers: phoneNumber[]
   pictureUrl: string | null
   pictureUrlTemp: string | null
-  pictureWidth: number
 }
 
 export interface BusinessInfo {
   pictureUrl: string | null
-  pictureWidth: number
+  pictureUrlTemp: string | null
   companyName?: string
   address?: string
   website?: string
