@@ -178,19 +178,19 @@ export const useSignatureStore = defineStore('signature', () => {
       businessInfo.value.website = ''
     }
 
-    businessInfo.value.pictureUrl = ''
     if (signatureBusinessInfo.pictureUrl && typeof signatureBusinessInfo.pictureUrl === 'string') {
       businessInfo.value.pictureUrl = signatureBusinessInfo.pictureUrl
     } else {
+      businessInfo.value.pictureUrl = ''
     }
 
-    businessInfo.value.pictureUrlTemp = ''
     if (
       signatureBusinessInfo.pictureUrlTemp &&
       typeof signatureBusinessInfo.pictureUrlTemp === 'string'
     ) {
       businessInfo.value.pictureUrlTemp = signatureBusinessInfo.pictureUrlTemp
     } else {
+      businessInfo.value.pictureUrlTemp = ''
     }
 
     businessInfo.value.socialMedias = []
