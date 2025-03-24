@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faShare } from '@fortawesome/pro-regular-svg-icons'
-import { Button } from './ui/button'
+import { faCopy, faDownload, faShare } from '@fortawesome/pro-regular-svg-icons'
 import { toast } from 'vue-sonner'
 import {
   DropdownMenu,
@@ -20,7 +19,6 @@ import { computed } from 'vue'
 import { templates } from './template'
 import type { Templates } from '@/types'
 
-const share = () => {
 const signatureStore = useSignatureStore()
 
 const handleCopySignature = () => {
@@ -46,17 +44,35 @@ const handleDownloadThemeOnly = () =>
   downloadFile(`${filename.value}-theme.json`, signatureStore.exportableTheme as string)
 </script>
 
-
-
-
-
 <template>
-  <Button
-    class="h-7 rounded-lg px-3 py-0.5 leading-6 transition-colors hover:bg-gray-500/10"
-    variant="ghost"
-    @click="share"
-    aria-label="Share this signature"
-  >
-    <FontAwesomeIcon :icon="faShare" class="text-foreground" />
-  </Button>
+  <DropdownMenu>
+    <DropdownMenuTrigger
+      aria-label="Share this signature"
+      class="rounded-lg px-3 py-0.5 transition-colors hover:bg-gray-500/10"
+    >
+      <FontAwesomeIcon :icon="faShare" class="text-foreground" />
+    </DropdownMenuTrigger>
+
+    <DropdownMenuContent align="start">
+      <DropdownMenuLabel>Share Signature</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+
+      <DropdownMenuItem @click="handleCopySignature">
+        <FontAwesomeIcon :icon="faCopy" fixed-width />
+        Copy
+      </DropdownMenuItem>
+
+      <DropdownMenuSub>
+        <DropdownMenuSubTrigger class="gap-x-2">
+          <FontAwesomeIcon :icon="faDownload" fixed-width />
+          Download
+        </DropdownMenuSubTrigger>
+
+        <DropdownMenuSubContent>
+          <DropdownMenuItem @click="handleDownloadSignature"> Full Signature </DropdownMenuItem>
+          <DropdownMenuItem @click="handleDownloadThemeOnly"> Theme Only </DropdownMenuItem>
+        </DropdownMenuSubContent>
+      </DropdownMenuSub>
+    </DropdownMenuContent>
+  </DropdownMenu>
 </template>
