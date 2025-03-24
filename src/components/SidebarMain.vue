@@ -70,7 +70,7 @@ const addSocialMedia = () =>
     <SidebarSection :icon="faShapes" title="Template">
       <FormGroup for="templateSelector" label="Template">
         <Select v-model="signatureStore.template">
-          <SelectTrigger>
+          <SelectTrigger aria-label="Select a template">
             <SelectValue placeholder="Select a template" />
           </SelectTrigger>
 
@@ -136,6 +136,7 @@ const addSocialMedia = () =>
             <div class="w-4/12">
               <Select v-model="phone.type">
                 <SelectTrigger
+                  aria-label="Select phone number type"
                   class="gap-x-2 rounded-r-none group-[&:not(:first-child)]:rounded-t-none group-[&:not(:last-child)]:rounded-b-none group-[&:not(:first-child)]:border-t-0"
                 >
                   <SelectValue placeholder="Icon" />
@@ -159,6 +160,7 @@ const addSocialMedia = () =>
             <Input
               v-model="phone.number"
               class="w-8/12 rounded-l-none border-l-0 group-[&:not(:first-child)]:rounded-t-none group-[&:not(:last-child)]:rounded-b-none group-[&:not(:first-child)]:border-t-0"
+              :aria-label="`Phone number ${index}`"
             />
 
             <Button
@@ -166,6 +168,7 @@ const addSocialMedia = () =>
               size="icon"
               class="rounded-full px-4 text-destructive hover:text-destructive/80"
               @click="deletePhoneNumber(index)"
+              aria-label="Remove phone number"
             >
               <FontAwesomeIcon :icon="faMinusCircle" fixed-width />
             </Button>
@@ -177,6 +180,7 @@ const addSocialMedia = () =>
             size="icon"
             class="rounded-full px-4 text-green-600 hover:text-green-600/80"
             @click="addPhoneNumber"
+            aria-label="Add new phone number"
           >
             <FontAwesomeIcon :icon="faPlusCircle" fixed-width />
           </Button>
@@ -230,6 +234,7 @@ const addSocialMedia = () =>
             <div class="">
               <Select v-model="socialMedia.type">
                 <SelectTrigger
+                  aria-label="Select social media type"
                   class="gap-x-2 rounded-r-none group-[&:not(:first-child)]:rounded-t-none group-[&:not(:last-child)]:rounded-b-none group-[&:not(:first-child)]:border-t-0"
                 >
                   <SelectValue placeholder="Icon" />
@@ -254,6 +259,7 @@ const addSocialMedia = () =>
               v-model="socialMedia.url"
               class="w-8/12 grow rounded-l-none border-l-0 group-[&:not(:first-child)]:rounded-t-none group-[&:not(:last-child)]:rounded-b-none group-[&:not(:first-child)]:border-t-0"
               placeholder="https://..."
+              :aria-label="`Social media URL ${index}`"
             />
 
             <Button
@@ -261,6 +267,7 @@ const addSocialMedia = () =>
               size="icon"
               class="rounded-full px-4 text-destructive hover:text-destructive/80"
               @click="deleteSocialMedia(index)"
+              aria-label="Remove social media"
             >
               <FontAwesomeIcon :icon="faMinusCircle" fixed-width />
             </Button>
@@ -272,6 +279,7 @@ const addSocialMedia = () =>
             size="icon"
             class="rounded-full px-4 text-green-600 hover:text-green-600/80"
             @click="addSocialMedia"
+            aria-label="Add social media"
           >
             <FontAwesomeIcon :icon="faPlusCircle" fixed-width />
           </Button>

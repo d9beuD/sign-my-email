@@ -5,7 +5,7 @@ const signatureStore = useSignatureStore()
 </script>
 
 <template>
-  <div class="pt-4 text-foreground" id="rendered-signature">
+  <div class="pt-4 text-foreground" id="rendered-signature" aria-hidden="true" inert>
     <component v-if="signatureStore.template" :is="signatureStore.template.template" />
   </div>
 </template>

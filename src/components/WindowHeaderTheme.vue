@@ -63,7 +63,10 @@ const textColor = computed(() =>
 <template>
   <Dialog>
     <DropdownMenu>
-      <DropdownMenuTrigger class="rounded-lg px-3 py-0.5 transition-colors hover:bg-gray-500/10">
+      <DropdownMenuTrigger
+        class="rounded-lg px-3 py-0.5 transition-colors hover:bg-gray-500/10"
+        aria-label="Edit signature theme"
+      >
         <FontAwesomeIcon :icon="faPalette" class="text-foreground" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
