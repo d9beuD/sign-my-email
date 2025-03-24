@@ -23,6 +23,7 @@ const handleSignatureImport = () => {
     .then((signature) => signatureStore.loadSignature(signature))
     .then(() => toast.success('The signature has been imported!'))
     .catch((reason) => toast.error(`An error occured: ${reason}`))
+    .finally(() => (input.value = ''))
 }
 
 onMounted(() => {

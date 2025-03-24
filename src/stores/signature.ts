@@ -125,6 +125,15 @@ export const useSignatureStore = defineStore('signature', () => {
       personalInfo.value.pictureUrl = ''
     }
 
+    if (
+      signaturePersonalInfo.pictureUrlTemp &&
+      typeof signaturePersonalInfo.pictureUrlTemp === 'string'
+    ) {
+      personalInfo.value.pictureUrlTemp = signaturePersonalInfo.pictureUrlTemp
+    } else {
+      personalInfo.value.pictureUrlTemp = ''
+    }
+
     personalInfo.value.phoneNumbers = []
     if (
       signaturePersonalInfo.phoneNumbers &&
@@ -169,10 +178,19 @@ export const useSignatureStore = defineStore('signature', () => {
       businessInfo.value.website = ''
     }
 
+    businessInfo.value.pictureUrl = ''
     if (signatureBusinessInfo.pictureUrl && typeof signatureBusinessInfo.pictureUrl === 'string') {
       businessInfo.value.pictureUrl = signatureBusinessInfo.pictureUrl
     } else {
-      businessInfo.value.pictureUrl = ''
+    }
+
+    businessInfo.value.pictureUrlTemp = ''
+    if (
+      signatureBusinessInfo.pictureUrlTemp &&
+      typeof signatureBusinessInfo.pictureUrlTemp === 'string'
+    ) {
+      businessInfo.value.pictureUrlTemp = signatureBusinessInfo.pictureUrlTemp
+    } else {
     }
 
     businessInfo.value.socialMedias = []
