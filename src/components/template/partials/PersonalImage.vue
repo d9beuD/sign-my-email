@@ -7,9 +7,10 @@ const signatureStore = useSignatureStore()
 
 <template>
   <TemplateImage
-    :src="signatureStore.personalInfo.pictureUrl as string"
+    v-if="signatureStore.personalPictureUrl"
+    :src="signatureStore.personalPictureUrl"
     :width="signatureStore.themeOptions.image.personal.width"
     :border-radius="signatureStore.themeOptions.image.personal.borderRadius"
-    alt=""
+    alt="Personal picture"
   />
 </template>

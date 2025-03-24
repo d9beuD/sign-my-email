@@ -7,9 +7,10 @@ const signatureStore = useSignatureStore()
 
 <template>
   <TemplateImage
-    :src="signatureStore.businessInfo.pictureUrl as string"
+    v-if="signatureStore.businessPictureUrl"
+    :src="signatureStore.businessPictureUrl"
     :width="signatureStore.themeOptions.image.business.width"
     :border-radius="signatureStore.themeOptions.image.business.borderRadius"
-    alt=""
+    alt="Business picture"
   />
 </template>

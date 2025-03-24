@@ -27,9 +27,14 @@ import { Button } from './ui/button'
 import AppIcon from '@/icons/AppIcon.vue'
 import { SocialMediaType } from '@/types'
 import { convertImageToDataURL } from '@/lib/utils'
+import { Switch } from './ui/switch'
+import { Label } from './ui/label'
+import { useTemplateRef } from 'vue'
 
 const signatureStore = useSignatureStore()
 const availableTemplates = templates
+const personalPictureInput = useTemplateRef('personalPictureInput')
+const businessPictureInput = useTemplateRef('businessPictureInput')
 
 const handlePictureChange = async (e: Event) => {
   const input = e.target as HTMLInputElement
@@ -42,8 +47,9 @@ const handlePictureChange = async (e: Event) => {
   return await convertImageToDataURL(files[0])
 }
 
-const onProfilePictureChange = async (e: Event) =>
-  (signatureStore.personalInfo.pictureUrlTemp = await handlePictureChange(e))
+const onProfilePictureChange = async (e: Event) => {
+  signatureStore.personalInfo.pictureUrlTemp = await handlePictureChange(e)
+}
 
 const onBusinessPictureChange = async (e: Event) =>
   (signatureStore.businessInfo.pictureUrlTemp = await handlePictureChange(e))
@@ -63,11 +69,17 @@ const addSocialMedia = () =>
 const clearProfileImage = () => {
   signatureStore.personalInfo.pictureUrl = null
   signatureStore.personalInfo.pictureUrlTemp = null
+  if (personalPictureInput.value) {
+    personalPictureInput.value.$el.value = ''
+  }
 }
 
 const clearBusinessImage = () => {
   signatureStore.businessInfo.pictureUrl = null
   signatureStore.businessInfo.pictureUrlTemp = null
+  if (businessPictureInput.value) {
+    businessPictureInput.value.$el.value = ''
+  }
 }
 </script>
 
@@ -99,23 +111,34 @@ const clearBusinessImage = () => {
 
     <SidebarSection :icon="faUser" title="Personal Info">
       <FormGroup for="personalPicture" label="Profile Picture">
-        <div class="flex">
-          <Input
-            placeholder="Profile Picture"
-            id="personalPicture"
-            type="file"
-            accept="image/*"
-            @change="onProfilePictureChange"
-          />
-          <Button
-            variant="link"
-            size="icon"
-            class="rounded-full px-4"
-            aria-label="Clear image"
-            @click="clearProfileImage"
-          >
-            <FontAwesomeIcon :icon="faXmarkCircle" />
-          </Button>
+        <div class="flex flex-col space-y-2">
+          <div class="flex">
+            <Input
+              placeholder="Profile Picture"
+              id="personalPicture"
+              type="file"
+              accept="image/*"
+              @change="onProfilePictureChange"
+              ref="personalPictureInput"
+            />
+            <Button
+              variant="link"
+              size="icon"
+              class="rounded-full px-4"
+              aria-label="Clear image"
+              @click="clearProfileImage"
+            >
+              <FontAwesomeIcon :icon="faXmarkCircle" />
+            </Button>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <Switch
+              id="personalImageWithPlaceholder"
+              v-model="signatureStore.themeOptions.image.personal.withPlaceholder"
+            />
+            <Label for="personalImageWithPlaceholder">Show placeholder</Label>
+          </div>
         </div>
       </FormGroup>
 
@@ -212,23 +235,34 @@ const clearBusinessImage = () => {
 
     <SidebarSection :icon="faSuitcase" title="Business Info">
       <FormGroup for="businessPicture" label="Business Picture">
-        <div class="flex">
-          <Input
-            placeholder="Business Picture"
-            id="businessPicture"
-            type="file"
-            accept="image/*"
-            @change="onBusinessPictureChange"
-          />
-          <Button
-            variant="link"
-            size="icon"
-            class="rounded-full px-4"
-            aria-label="Clear image"
-            @click="clearBusinessImage"
-          >
-            <FontAwesomeIcon :icon="faXmarkCircle" />
-          </Button>
+        <div class="flex flex-col space-y-2">
+          <div class="flex">
+            <Input
+              placeholder="Business Picture"
+              id="businessPicture"
+              type="file"
+              accept="image/*"
+              @change="onBusinessPictureChange"
+              ref="businessPictureInput"
+            />
+            <Button
+              variant="link"
+              size="icon"
+              class="rounded-full px-4"
+              aria-label="Clear image"
+              @click="clearBusinessImage"
+            >
+              <FontAwesomeIcon :icon="faXmarkCircle" />
+            </Button>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <Switch
+              id="businessImageWithPlaceholder"
+              v-model="signatureStore.themeOptions.image.business.withPlaceholder"
+            />
+            <Label for="businessImageWithPlaceholder">Show placeholder</Label>
+          </div>
         </div>
       </FormGroup>
 

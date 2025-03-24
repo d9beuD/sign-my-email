@@ -12,7 +12,7 @@ import {
 } from '@/types'
 import { computedAsync } from '@vueuse/core'
 import { defineStore } from 'pinia'
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 export const useSignatureStore = defineStore('signature', () => {
   const personalInfo = ref<PersonalInfo>({
@@ -20,7 +20,7 @@ export const useSignatureStore = defineStore('signature', () => {
     department: 'IT Department',
     jobTitle: 'Web Developer',
     email: 'john.doe@example.com',
-    pictureUrl: 'https://placehold.co/100',
+    pictureUrl: null,
     pictureUrlTemp: null,
     phoneNumbers: [{ number: '+33 6 12 34 56 78', type: 'mobile' }],
   })
@@ -30,7 +30,7 @@ export const useSignatureStore = defineStore('signature', () => {
     companyName: 'F Society Inc.',
     address: `123 5th Street,\n` + 'New York NY,\n' + 'USA',
     website: 'https://example.com',
-    pictureUrl: 'https://placehold.co/200x50',
+    pictureUrl: null,
     pictureUrlTemp: null,
   })
 
@@ -52,16 +52,34 @@ export const useSignatureStore = defineStore('signature', () => {
       personal: {
         width: 100,
         borderRadius: 0,
+        withPlaceholder: true,
       },
       business: {
         width: 200,
         borderRadius: 0,
+        withPlaceholder: true,
       },
     },
     divider: {
       width: 2,
     },
   })
+
+  const personalPictureUrl = computed(() =>
+    !personalInfo.value.pictureUrl
+      ? themeOptions.value.image.personal.withPlaceholder
+        ? `https://placehold.co/${themeOptions.value.image.personal.width}`
+        : null
+      : personalInfo.value.pictureUrl,
+  )
+
+  const businessPictureUrl = computed(() =>
+    !businessInfo.value.pictureUrl
+      ? themeOptions.value.image.business.withPlaceholder
+        ? `https://placehold.co/${themeOptions.value.image.business.width}x50`
+        : null
+      : businessInfo.value.pictureUrl,
+  )
 
   const exportableSignature = computedAsync(async () => {
     return JSON.stringify({
@@ -305,6 +323,8 @@ export const useSignatureStore = defineStore('signature', () => {
     businessInfo,
     template,
     themeOptions,
+    personalPictureUrl,
+    businessPictureUrl,
     exportableSignature,
     exportableTheme,
     loadSignature,
