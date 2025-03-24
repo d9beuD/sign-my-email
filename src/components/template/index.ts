@@ -1,8 +1,7 @@
 import { Templates, type TemplateList } from '@/types'
 import { SocialMediaType } from '@/types'
 import SingleColumn01 from './SingleColumn01.vue'
-import SingleColumn02 from './SingleColumn02.vue'
-import { markRaw, type Component } from 'vue'
+import { markRaw } from 'vue'
 import {
   faMobile,
   faPhone,
@@ -12,7 +11,7 @@ import {
 } from '@fortawesome/pro-regular-svg-icons'
 import {
   faAirbnb,
-  faFacebook,
+  faFacebookF,
   faFacebookMessenger,
   faFlickr,
   faGithub,
@@ -44,7 +43,7 @@ export const phoneIcons = {
 
 export const socialMedias: Record<SocialMediaType, { name: string; icon: IconDefinition }> = {
   [SocialMediaType.Airbnb]: { name: 'Airbnb', icon: faAirbnb },
-  [SocialMediaType.Facebook]: { name: 'Facebook', icon: faFacebook },
+  [SocialMediaType.Facebook]: { name: 'Facebook', icon: faFacebookF },
   [SocialMediaType.Flickr]: { name: 'Flickr', icon: faFlickr },
   [SocialMediaType.GitHub]: { name: 'GitHub', icon: faGithub },
   [SocialMediaType.Google]: { name: 'Google', icon: faGoogle },
