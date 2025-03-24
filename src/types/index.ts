@@ -49,6 +49,8 @@ export enum SocialMediaType {
   Whatsapp,
   X,
   Youtube,
+
+  Other,
 }
 
 export interface SocialMedia {

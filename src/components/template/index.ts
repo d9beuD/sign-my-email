@@ -3,6 +3,7 @@ import { SocialMediaType } from '@/types'
 import SingleColumn01 from './SingleColumn01.vue'
 import { markRaw } from 'vue'
 import {
+  faGlobe,
   faMobile,
   faPhone,
   faPhoneRotary,
@@ -62,4 +63,6 @@ export const socialMedias: Record<SocialMediaType, { name: string; icon: IconDef
   [SocialMediaType.Whatsapp]: { name: 'WhatsApp', icon: faWhatsapp },
   [SocialMediaType.X]: { name: 'X', icon: faXTwitter },
   [SocialMediaType.Youtube]: { name: 'YouTube', icon: faYoutube },
+
+  [SocialMediaType.Other]: { name: 'Other', icon: faGlobe },
 }
