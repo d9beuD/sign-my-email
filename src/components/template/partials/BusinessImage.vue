@@ -11,6 +11,6 @@ const signatureStore = useSignatureStore()
     :src="signatureStore.businessPictureUrl"
     :width="signatureStore.themeOptions.image.business.width"
     :border-radius="signatureStore.themeOptions.image.business.borderRadius"
-    alt=""
+    alt="Business picture"
   />
 </template>
