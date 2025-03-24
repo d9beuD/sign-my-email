@@ -77,6 +77,7 @@ export type Color = ColorHex | ColorRgb | ColorRgba | 'inherit'
 export interface ThemeImageOptions {
   width: number
   borderRadius: number
+  withPlaceholder: boolean
 }
 
 export interface ThemeOptions {

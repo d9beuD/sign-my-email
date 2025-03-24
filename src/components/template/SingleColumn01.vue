@@ -20,7 +20,7 @@ const showFirstSection = computed<boolean>(
     !!signatureStore.personalInfo.jobTitle ||
     !!signatureStore.personalInfo.department ||
     !!signatureStore.businessInfo.companyName ||
-    !!signatureStore.personalInfo.pictureUrl,
+    !!signatureStore.personalPictureUrl,
 )
 const showSecondSection = computed<boolean>(
   () =>
@@ -30,8 +30,7 @@ const showSecondSection = computed<boolean>(
     !!signatureStore.businessInfo.address,
 )
 const showThirdSection = computed<boolean>(
-  () =>
-    !!signatureStore.businessInfo.socialMedias.length || !!signatureStore.businessInfo.pictureUrl,
+  () => !!signatureStore.businessInfo.socialMedias.length || !!signatureStore.businessPictureUrl,
 )
 const showFirstDivider = computed<boolean>(
   () => showFirstSection.value && (showSecondSection.value || showThirdSection.value),
@@ -43,7 +42,7 @@ const showFirstDivider = computed<boolean>(
     <!-- First Section -->
     <TemplateRow v-if="showFirstSection">
       <TemplateColumn>
-        <div v-if="signatureStore.personalInfo.pictureUrl" style="padding-bottom: 16px">
+        <div v-if="signatureStore.personalPictureUrl" style="padding-bottom: 16px">
           <PersonalImage />
         </div>
         <DesignationInfo />
@@ -73,7 +72,7 @@ const showFirstDivider = computed<boolean>(
 
     <!-- Third Section -->
     <template v-if="showThirdSection">
-      <TemplateRow v-if="signatureStore.businessInfo.pictureUrl">
+      <TemplateRow v-if="signatureStore.businessPictureUrl">
         <TemplateColumn>
           <BusinessImage />
           <div
