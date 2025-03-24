@@ -32,6 +32,7 @@ import DialogContentProfilePictureWidth from './ui/theme/DialogContentProfilePic
 import DialogContentDividerWidth from './ui/theme/DialogContentDividerWidth.vue'
 import DialogContentBusinessPictureRadius from './ui/theme/DialogContentBusinessPictureRadius.vue'
 import DialogContentBusinessPictureWidth from './ui/theme/DialogContentBusinessPictureWidth.vue'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
 
 const signatureStore = useSignatureStore()
 
@@ -62,153 +63,163 @@ const textColor = computed(() =>
 
 <template>
   <Dialog>
-    <DropdownMenu>
-      <DropdownMenuTrigger
-        class="rounded-lg px-3 py-0.5 transition-colors hover:bg-gray-500/10"
-        aria-label="Edit signature theme"
-      >
-        <FontAwesomeIcon :icon="faPalette" class="text-foreground" />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start">
-        <DropdownMenuLabel>Theme Options</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <span>
-              <FontAwesomeIcon :icon="faSwatchbook" fixed-width />
-              Colors
-            </span>
-          </DropdownMenuSubTrigger>
-
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <DialogTrigger as-child @click="setDialog('primaryColor')">
-                <DropdownMenuItem class="items-center justify-between gap-x-3">
-                  Primary Color
-                  <MenuItemColorPreview :color="signatureStore.themeOptions.color.primary" />
-                </DropdownMenuItem>
-              </DialogTrigger>
-
-              <DialogTrigger as-child @click="setDialog('secondaryColor')">
-                <DropdownMenuItem class="items-center justify-between gap-x-3">
-                  Secondary Color
-                  <MenuItemColorPreview :color="textColor" />
-                </DropdownMenuItem>
-              </DialogTrigger>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
-
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <span>
-              <FontAwesomeIcon :icon="faTextSize" fixed-width />
-              Texts
-            </span>
-          </DropdownMenuSubTrigger>
-
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <DialogTrigger as-child @click="setDialog('fontSizetitle')">
-                <DropdownMenuItem class="items-center justify-between gap-x-3">
-                  Title Font Size
-                  <small class="text-slate-500">
-                    {{ signatureStore.themeOptions.text.fontSize.title }}px
-                  </small>
-                </DropdownMenuItem>
-              </DialogTrigger>
-
-              <DialogTrigger as-child @click="setDialog('fontSizeBase')">
-                <DropdownMenuItem class="items-center justify-between gap-x-3">
-                  Base Font Size
-                  <small class="text-slate-500">
-                    {{ signatureStore.themeOptions.text.fontSize.base }}px
-                  </small>
-                </DropdownMenuItem>
-              </DialogTrigger>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
-
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <span>
-              <FontAwesomeIcon :icon="faImage" fixed-width />
-              Images
-            </span>
-          </DropdownMenuSubTrigger>
-
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <DropdownMenuLabel>Profile Picture</DropdownMenuLabel>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              class="rounded-lg px-3 py-0.5 transition-colors hover:bg-gray-500/10"
+              aria-label="Edit signature theme"
+            >
+              <FontAwesomeIcon :icon="faPalette" class="text-foreground" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuLabel>Theme Options</DropdownMenuLabel>
               <DropdownMenuSeparator />
 
-              <DialogTrigger as-child @click="setDialog('profilePictureWidth')">
-                <DropdownMenuItem class="items-center justify-between gap-x-3">
-                  Width
-                  <small class="text-slate-500">
-                    {{ signatureStore.themeOptions.image.personal.width }}px
-                  </small>
-                </DropdownMenuItem>
-              </DialogTrigger>
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                  <span>
+                    <FontAwesomeIcon :icon="faSwatchbook" fixed-width />
+                    Colors
+                  </span>
+                </DropdownMenuSubTrigger>
 
-              <DialogTrigger as-child @click="setDialog('profilePictureRadius')">
-                <DropdownMenuItem class="items-center justify-between gap-x-3">
-                  Border Radius
-                  <small class="text-slate-500">
-                    {{ signatureStore.themeOptions.image.personal.borderRadius }}px
-                  </small>
-                </DropdownMenuItem>
-              </DialogTrigger>
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DialogTrigger as-child @click="setDialog('primaryColor')">
+                      <DropdownMenuItem class="items-center justify-between gap-x-3">
+                        Primary Color
+                        <MenuItemColorPreview :color="signatureStore.themeOptions.color.primary" />
+                      </DropdownMenuItem>
+                    </DialogTrigger>
 
-              <DropdownMenuLabel class="pt-4">Business Picture</DropdownMenuLabel>
-              <DropdownMenuSeparator />
+                    <DialogTrigger as-child @click="setDialog('secondaryColor')">
+                      <DropdownMenuItem class="items-center justify-between gap-x-3">
+                        Secondary Color
+                        <MenuItemColorPreview :color="textColor" />
+                      </DropdownMenuItem>
+                    </DialogTrigger>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
 
-              <DialogTrigger as-child @click="setDialog('businessPictureWidth')">
-                <DropdownMenuItem class="items-center justify-between gap-x-3">
-                  Width
-                  <small class="text-slate-500">
-                    {{ signatureStore.themeOptions.image.business.width }}px
-                  </small>
-                </DropdownMenuItem>
-              </DialogTrigger>
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                  <span>
+                    <FontAwesomeIcon :icon="faTextSize" fixed-width />
+                    Texts
+                  </span>
+                </DropdownMenuSubTrigger>
 
-              <DialogTrigger as-child @click="setDialog('businessPictureRadius')">
-                <DropdownMenuItem class="items-center justify-between gap-x-3">
-                  Border Radius
-                  <small class="text-slate-500">
-                    {{ signatureStore.themeOptions.image.business.borderRadius }}px
-                  </small>
-                </DropdownMenuItem>
-              </DialogTrigger>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DialogTrigger as-child @click="setDialog('fontSizetitle')">
+                      <DropdownMenuItem class="items-center justify-between gap-x-3">
+                        Title Font Size
+                        <small class="text-slate-500">
+                          {{ signatureStore.themeOptions.text.fontSize.title }}px
+                        </small>
+                      </DropdownMenuItem>
+                    </DialogTrigger>
 
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <span>
-              <FontAwesomeIcon :icon="faHorizontalRule" fixed-width />
-              Dividers
-            </span>
-          </DropdownMenuSubTrigger>
+                    <DialogTrigger as-child @click="setDialog('fontSizeBase')">
+                      <DropdownMenuItem class="items-center justify-between gap-x-3">
+                        Base Font Size
+                        <small class="text-slate-500">
+                          {{ signatureStore.themeOptions.text.fontSize.base }}px
+                        </small>
+                      </DropdownMenuItem>
+                    </DialogTrigger>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
 
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <DialogTrigger as-child @click="setDialog('dividerWidth')">
-                <DropdownMenuItem class="items-center justify-between gap-x-3">
-                  Width
-                  <small class="text-slate-500">
-                    {{ signatureStore.themeOptions.divider.width }}px
-                  </small>
-                </DropdownMenuItem>
-              </DialogTrigger>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
-      </DropdownMenuContent>
-    </DropdownMenu>
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                  <span>
+                    <FontAwesomeIcon :icon="faImage" fixed-width />
+                    Images
+                  </span>
+                </DropdownMenuSubTrigger>
+
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuLabel>Profile Picture</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+
+                    <DialogTrigger as-child @click="setDialog('profilePictureWidth')">
+                      <DropdownMenuItem class="items-center justify-between gap-x-3">
+                        Width
+                        <small class="text-slate-500">
+                          {{ signatureStore.themeOptions.image.personal.width }}px
+                        </small>
+                      </DropdownMenuItem>
+                    </DialogTrigger>
+
+                    <DialogTrigger as-child @click="setDialog('profilePictureRadius')">
+                      <DropdownMenuItem class="items-center justify-between gap-x-3">
+                        Border Radius
+                        <small class="text-slate-500">
+                          {{ signatureStore.themeOptions.image.personal.borderRadius }}px
+                        </small>
+                      </DropdownMenuItem>
+                    </DialogTrigger>
+
+                    <DropdownMenuLabel class="pt-4">Business Picture</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+
+                    <DialogTrigger as-child @click="setDialog('businessPictureWidth')">
+                      <DropdownMenuItem class="items-center justify-between gap-x-3">
+                        Width
+                        <small class="text-slate-500">
+                          {{ signatureStore.themeOptions.image.business.width }}px
+                        </small>
+                      </DropdownMenuItem>
+                    </DialogTrigger>
+
+                    <DialogTrigger as-child @click="setDialog('businessPictureRadius')">
+                      <DropdownMenuItem class="items-center justify-between gap-x-3">
+                        Border Radius
+                        <small class="text-slate-500">
+                          {{ signatureStore.themeOptions.image.business.borderRadius }}px
+                        </small>
+                      </DropdownMenuItem>
+                    </DialogTrigger>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
+
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                  <span>
+                    <FontAwesomeIcon :icon="faHorizontalRule" fixed-width />
+                    Dividers
+                  </span>
+                </DropdownMenuSubTrigger>
+
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DialogTrigger as-child @click="setDialog('dividerWidth')">
+                      <DropdownMenuItem class="items-center justify-between gap-x-3">
+                        Width
+                        <small class="text-slate-500">
+                          {{ signatureStore.themeOptions.divider.width }}px
+                        </small>
+                      </DropdownMenuItem>
+                    </DialogTrigger>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </TooltipTrigger>
+
+        <TooltipContent>
+          <p>Theme your signature</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
     <component :is="currentDialog" />
   </Dialog>
 </template>
