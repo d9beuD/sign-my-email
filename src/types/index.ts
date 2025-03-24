@@ -35,7 +35,7 @@ export enum SocialMediaType {
   Google,
   Imdb,
   Instagram,
-  // Linktree,
+  LinkedIn,
   Medium,
   Messenger,
   Patreon,
@@ -49,6 +49,8 @@ export enum SocialMediaType {
   Whatsapp,
   X,
   Youtube,
+
+  Other,
 }
 
 export interface SocialMedia {

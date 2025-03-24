@@ -1,9 +1,9 @@
 import { Templates, type TemplateList } from '@/types'
 import { SocialMediaType } from '@/types'
 import SingleColumn01 from './SingleColumn01.vue'
-import SingleColumn02 from './SingleColumn02.vue'
-import { markRaw, type Component } from 'vue'
+import { markRaw } from 'vue'
 import {
+  faGlobe,
   faMobile,
   faPhone,
   faPhoneRotary,
@@ -12,13 +12,14 @@ import {
 } from '@fortawesome/pro-regular-svg-icons'
 import {
   faAirbnb,
-  faFacebook,
+  faFacebookF,
   faFacebookMessenger,
   faFlickr,
   faGithub,
   faGoogle,
   faImdb,
   faInstagram,
+  faLinkedinIn,
   faMedium,
   faPatreon,
   faPinterest,
@@ -43,12 +44,13 @@ export const phoneIcons = {
 
 export const socialMedias: Record<SocialMediaType, { name: string; icon: IconDefinition }> = {
   [SocialMediaType.Airbnb]: { name: 'Airbnb', icon: faAirbnb },
-  [SocialMediaType.Facebook]: { name: 'Facebook', icon: faFacebook },
+  [SocialMediaType.Facebook]: { name: 'Facebook', icon: faFacebookF },
   [SocialMediaType.Flickr]: { name: 'Flickr', icon: faFlickr },
   [SocialMediaType.GitHub]: { name: 'GitHub', icon: faGithub },
   [SocialMediaType.Google]: { name: 'Google', icon: faGoogle },
   [SocialMediaType.Imdb]: { name: 'IMDb', icon: faImdb },
   [SocialMediaType.Instagram]: { name: 'Instagram', icon: faInstagram },
+  [SocialMediaType.LinkedIn]: { name: 'LinkedIn', icon: faLinkedinIn },
   [SocialMediaType.Medium]: { name: 'Medium', icon: faMedium },
   [SocialMediaType.Messenger]: { name: 'Messenger', icon: faFacebookMessenger },
   [SocialMediaType.Patreon]: { name: 'Patreon', icon: faPatreon },
@@ -61,4 +63,6 @@ export const socialMedias: Record<SocialMediaType, { name: string; icon: IconDef
   [SocialMediaType.Whatsapp]: { name: 'WhatsApp', icon: faWhatsapp },
   [SocialMediaType.X]: { name: 'X', icon: faXTwitter },
   [SocialMediaType.Youtube]: { name: 'YouTube', icon: faYoutube },
+
+  [SocialMediaType.Other]: { name: 'Other', icon: faGlobe },
 }
