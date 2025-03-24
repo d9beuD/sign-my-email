@@ -26,6 +26,13 @@ const currentTemplate = computed<Component | null>(() => {
       <skeleton class="h-4 w-40" />
       <skeleton class="h-4 w-28" />
       <skeleton class="h-4 w-36" />
+      <Skeleton class="h-12 w-48" />
+      <div class="flex gap-2">
+        <Skeleton class="size-6" />
+        <Skeleton class="size-6" />
+        <Skeleton class="size-6" />
+        <Skeleton class="size-6" />
+      </div>
     </div>
   </div>
 </template>
