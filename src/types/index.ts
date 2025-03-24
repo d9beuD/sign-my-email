@@ -4,7 +4,7 @@ import type { Component } from 'vue'
 export interface MailSignature {
   personalInfo: PersonalInfo
   businessInfo: BusinessInfo
-  template: Template
+  template: Templates | null
   themeOptions: ThemeOptions
 }
 
@@ -61,10 +61,11 @@ export interface phoneNumber {
   type: keyof typeof phoneIcons
 }
 
-export interface Template {
-  name: string
-  template?: Component
+export enum Templates {
+  SignleColumn01,
 }
+
+export type TemplateList = Record<Templates, { name: string; template: Component }>
 
 export type ColorHex = `#${string}`
 export type ColorRgb = `rgb(${number}, ${number}, ${number})`
