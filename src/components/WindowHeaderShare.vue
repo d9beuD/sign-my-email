@@ -75,6 +75,7 @@ const share = () => {
     class="h-7 rounded-lg px-3 py-0.5 leading-6 transition-colors hover:bg-gray-500/10"
     variant="ghost"
     @click="share"
+    aria-label="Share this signature"
   >
     <FontAwesomeIcon :icon="faShare" class="text-foreground" />
   </Button>
