@@ -22,7 +22,7 @@ export const useSignatureStore = defineStore('signature', () => {
     New York NY,
     USA`,
     website: 'https://example.com',
-    pictureUrl: null,
+    pictureUrl: 'https://placehold.co/200x50',
     pictureUrlTemp: null,
   })
 
@@ -63,6 +63,17 @@ export const useSignatureStore = defineStore('signature', () => {
       }
 
       personalInfo.value.pictureUrl = await cropImageFromDataURL(newUrl, newWidth, false)
+    },
+  )
+
+  watch(
+    [() => businessInfo.value.pictureUrlTemp, () => themeOptions.value.image.business.width],
+    async ([newUrl, newWidth]) => {
+      if (!newUrl) {
+        return
+      }
+
+      businessInfo.value.pictureUrl = await cropImageFromDataURL(newUrl, newWidth, true)
     },
   )
 

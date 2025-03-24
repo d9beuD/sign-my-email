@@ -44,6 +44,9 @@ const handlePictureChange = async (e: Event) => {
 const onProfilePictureChange = async (e: Event) =>
   (signatureStore.personalInfo.pictureUrlTemp = await handlePictureChange(e))
 
+const onBusinessPictureChange = async (e: Event) =>
+  (signatureStore.businessInfo.pictureUrlTemp = await handlePictureChange(e))
+
 const deletePhoneNumber = (index: number) =>
   signatureStore.personalInfo.phoneNumbers.splice(index, 1)
 
@@ -182,6 +185,16 @@ const addSocialMedia = () =>
     </SidebarSection>
 
     <SidebarSection :icon="faSuitcase" title="Business Info">
+      <FormGroup for="businessPicture" label="Business Picture">
+        <Input
+          placeholder="Business Picture"
+          id="businessPicture"
+          type="file"
+          accept="image/*"
+          @change="onBusinessPictureChange"
+        />
+      </FormGroup>
+
       <FormGroup for="businessName" label="Company Name">
         <Input
           v-model="signatureStore.businessInfo.companyName"

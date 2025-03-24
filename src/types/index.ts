@@ -20,6 +20,7 @@ export interface PersonalInfo {
 
 export interface BusinessInfo {
   pictureUrl: string | null
+  pictureUrlTemp: string | null
   companyName?: string
   address?: string
   website?: string

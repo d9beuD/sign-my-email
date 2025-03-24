@@ -30,6 +30,8 @@ import DialogContentFontSizeTitle from './ui/theme/DialogContentFontSizeTitle.vu
 import DialogContentProfilePictureRadius from './ui/theme/DialogContentProfilePictureRadius.vue'
 import DialogContentProfilePictureWidth from './ui/theme/DialogContentProfilePictureWidth.vue'
 import DialogContentDividerWidth from './ui/theme/DialogContentDividerWidth.vue'
+import DialogContentBusinessPictureRadius from './ui/theme/DialogContentBusinessPictureRadius.vue'
+import DialogContentBusinessPictureWidth from './ui/theme/DialogContentBusinessPictureWidth.vue'
 
 const signatureStore = useSignatureStore()
 
@@ -40,6 +42,8 @@ const availableDialogContents = {
   fontSizetitle: shallowRef(DialogContentFontSizeTitle),
   profilePictureRadius: shallowRef(DialogContentProfilePictureRadius),
   profilePictureWidth: shallowRef(DialogContentProfilePictureWidth),
+  businessPictureRadius: shallowRef(DialogContentBusinessPictureRadius),
+  businessPictureWidth: shallowRef(DialogContentBusinessPictureWidth),
   dividerWidth: shallowRef(DialogContentDividerWidth),
 }
 
@@ -151,6 +155,27 @@ const textColor = computed(() =>
                   Border Radius
                   <small class="text-slate-500">
                     {{ signatureStore.themeOptions.image.personal.borderRadius }}px
+                  </small>
+                </DropdownMenuItem>
+              </DialogTrigger>
+
+              <DropdownMenuLabel class="pt-4">Business Picture</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+
+              <DialogTrigger as-child @click="setDialog('businessPictureWidth')">
+                <DropdownMenuItem class="items-center justify-between gap-x-3">
+                  Width
+                  <small class="text-slate-500">
+                    {{ signatureStore.themeOptions.image.business.width }}px
+                  </small>
+                </DropdownMenuItem>
+              </DialogTrigger>
+
+              <DialogTrigger as-child @click="setDialog('businessPictureRadius')">
+                <DropdownMenuItem class="items-center justify-between gap-x-3">
+                  Border Radius
+                  <small class="text-slate-500">
+                    {{ signatureStore.themeOptions.image.business.borderRadius }}px
                   </small>
                 </DropdownMenuItem>
               </DialogTrigger>
