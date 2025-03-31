@@ -15,6 +15,16 @@ import BusinessImage from './partials/BusinessImage.vue'
 const signatureStore = useSignatureStore()
 
 const showFirstSection = computed<boolean>(
+  () => !!signatureStore.personalPictureUrl || showDesignationInfo.value,
+)
+const showSecondSection = computed<boolean>(
+  () => !!signatureStore.businessPictureUrl || showContactDetails.value,
+)
+const showThirdSection = computed<boolean>(() => !!signatureStore.businessInfo.socialMedias.length)
+const showFirstDivider = computed<boolean>(
+  () => showFirstSection.value && (showSecondSection.value || showThirdSection.value),
+)
+const showDesignationInfo = computed<boolean>(
   () =>
     !!signatureStore.personalInfo.name ||
     !!signatureStore.personalInfo.jobTitle ||
@@ -22,18 +32,15 @@ const showFirstSection = computed<boolean>(
     !!signatureStore.businessInfo.companyName ||
     !!signatureStore.personalPictureUrl,
 )
-const showSecondSection = computed<boolean>(
+const showContactDetails = computed<boolean>(
   () =>
     !!signatureStore.personalInfo.email ||
     !!signatureStore.personalInfo.phoneNumbers.length ||
     !!signatureStore.businessInfo.website ||
     !!signatureStore.businessInfo.address,
 )
-const showThirdSection = computed<boolean>(
-  () => !!signatureStore.businessInfo.socialMedias.length || !!signatureStore.businessPictureUrl,
-)
-const showFirstDivider = computed<boolean>(
-  () => showFirstSection.value && (showSecondSection.value || showThirdSection.value),
+const dividerSectionColspan = computed<number>(() =>
+  showContactDetails.value && showDesignationInfo.value ? 2 : 1,
 )
 </script>
 
@@ -41,31 +48,39 @@ const showFirstDivider = computed<boolean>(
   <TemplateBase>
     <!-- First Section -->
     <TemplateRow v-if="showFirstSection">
-      <TemplateColumn>
-        <div v-if="signatureStore.personalPictureUrl" style="padding-bottom: 16px">
-          <PersonalImage />
-        </div>
+      <TemplateColumn :colspan="dividerSectionColspan">
+        <PersonalImage />
+
+        <div
+          v-if="!!signatureStore.personalPictureUrl && showDesignationInfo"
+          style="padding-top: 16px"
+        ></div>
+
         <DesignationInfo />
       </TemplateColumn>
     </TemplateRow>
 
     <!-- First Divider -->
     <TemplateRow v-if="showFirstDivider">
-      <TemplateColumn style="padding: 16px 0">
+      <TemplateColumn :colspan="dividerSectionColspan" style="padding: 16px 0">
         <TemplateDivider orientation="horizontal" />
       </TemplateColumn>
     </TemplateRow>
 
     <!-- Second Section -->
     <TemplateRow v-if="showSecondSection">
-      <TemplateColumn>
+      <TemplateColumn v-if="!!signatureStore.businessPictureUrl" style="padding-right: 16px">
+        <BusinessImage />
+      </TemplateColumn>
+
+      <TemplateColumn v-if="showContactDetails">
         <ContactDetails />
       </TemplateColumn>
     </TemplateRow>
 
     <!-- Second Divider -->
     <TemplateRow v-if="showSecondSection && showThirdSection">
-      <TemplateColumn style="padding: 16px 0">
+      <TemplateColumn :colspan="dividerSectionColspan" style="padding: 16px 0">
         <TemplateDivider orientation="horizontal" />
       </TemplateColumn>
     </TemplateRow>
@@ -73,14 +88,8 @@ const showFirstDivider = computed<boolean>(
     <!-- Third Section -->
     <template v-if="showThirdSection">
       <TemplateRow>
-        <TemplateColumn>
-          <div v-if="signatureStore.businessPictureUrl" style="padding-bottom: 16px">
-            <BusinessImage />
-          </div>
-
-          <div v-if="signatureStore.businessInfo.socialMedias.length">
-            <SocialMedias />
-          </div>
+        <TemplateColumn :colspan="dividerSectionColspan">
+          <SocialMedias />
         </TemplateColumn>
       </TemplateRow>
     </template>

@@ -64,7 +64,12 @@ export interface phoneNumber {
 }
 
 export enum Templates {
-  SignleColumn01,
+  SingleColumn01,
+  SingleColumn02,
+  TwoColumns01,
+  TwoColumns02,
+  Vertical01,
+  Vertical02,
 }
 
 export type TemplateList = Record<Templates, { name: string; template: Component }>

@@ -31,9 +31,19 @@ import {
   faXTwitter,
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons'
+import SingleColumn02 from './SingleColumn02.vue'
+import TwoColumns01 from './TwoColumns01.vue'
+import TwoColumns02 from './TwoColumns02.vue'
+import Vertical01 from './Vertical01.vue'
+import Vertical02 from './Vertical02.vue'
 
 export const templates: TemplateList = {
-  [Templates.SignleColumn01]: { name: 'Single Column 01', template: markRaw(SingleColumn01) },
+  [Templates.SingleColumn01]: { name: 'Single Column 01', template: markRaw(SingleColumn01) },
+  [Templates.SingleColumn02]: { name: 'Single Column 02', template: markRaw(SingleColumn02) },
+  [Templates.TwoColumns01]: { name: 'Two Columns 01', template: markRaw(TwoColumns01) },
+  [Templates.TwoColumns02]: { name: 'Two Columns 02', template: markRaw(TwoColumns02) },
+  [Templates.Vertical01]: { name: 'Vertical 01', template: markRaw(Vertical01) },
+  [Templates.Vertical02]: { name: 'Vertical 02', template: markRaw(Vertical02) },
 }
 
 export const phoneIcons = {
