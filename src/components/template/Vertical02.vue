@@ -52,14 +52,12 @@ const showSocialMedias = computed<boolean>(() => !!signatureStore.businessInfo.s
 
         <div
           v-if="(showDesignationInfo && showContactInfo) || showSocialMedias"
-          style="padding: 16px 0"
+          style="padding-bottom: 16px"
         ></div>
 
         <ContactDetails v-if="showContactInfo" />
 
-        <div v-if="showContactInfo && showSocialMedias" style="padding: 16px 0">
-          <TemplateDivider orientation="horizontal" />
-        </div>
+        <div v-if="showContactInfo && showSocialMedias" style="padding-bottom: 16px"></div>
 
         <SocialMedias v-if="showSocialMedias" />
       </TemplateColumn>
