@@ -25,42 +25,13 @@ jobs:
       - name: Build
         run: npm run build
 
-      # Get the public IP of the runner
-      - name: Public IP
-        id: ip
-        uses: haythem/public-ip@v1.3
-
-      - uses: tecolicom/actions-use-apt-tools@v1
+      - name: Whitelist Runner IP
+        uses: d9beuD/o2switch-whitelisting@v1.0.0
         with:
-          tools: oathtool gnupg2
-          method: timestamp
-
-      # Whitelist the public IP of the runner on the remote server by adding it
-      # to the SSH whitelist and wait 65 seconds for the IP to be whitelisted
-      - name: Whitelist IP on hosting & delete github old ones (o2switch)
-        shell: bash
-        run: |
-          ENDPOINT='frontend/o2switch/o2switch-ssh-whitelist/index.live.php'
-          OTP=$(oathtool -b --totp '${{ secrets.O2SWITCH_OTP_SECRET }}')
-          AUTH_STR="Basic $(echo -n '${{ secrets.O2SWITCH_USER }}:${{ secrets.O2SWITCH_PASSWORD }}' | base64)"
-
-          echo "Get actual whitelisted IPs..."
-          UNIQUE_IPS=$(curl -H "Authorization: $AUTH_STR" -H "X-CPANEL-OTP: $OTP" -sX GET "https://${{ secrets.O2SWITCH_HOST }}:2083/$ENDPOINT?r=list" | jq -r '.data.list[] | .address' | sort -u)
-          for address in $UNIQUE_IPS; do
-            # if [[ $address == "$#{{ secrets.IP_TO_KEEP }}" ]]; then
-            #     echo "Keep this IP, go to the next..."
-            #     continue
-            # fi
-            echo "Delete this github IP: $address (in & out)"
-            curl -H "Authorization: $AUTH_STR" -H "X-CPANEL-OTP: $OTP" -sX GET "https://${{ secrets.O2SWITCH_HOST }}:2083/$ENDPOINT?r=remove&address=$address&direction=in&port=22" | jq
-            sleep 3
-            curl -H "Authorization: $AUTH_STR" -H "X-CPANEL-OTP: $OTP" -sX GET "https://${{ secrets.O2SWITCH_HOST }}:2083/$ENDPOINT?r=remove&address=$address&direction=out&port=22" | jq
-            sleep 3
-          done
-          echo "All non-whitelisted IPs deleted!"
-
-          echo "Attempt to whitelist IP..."
-          curl -H "Authorization: $AUTH_STR" -H "X-CPANEL-OTP: $OTP" -sX POST -d 'whitelist[address]=${{ steps.ip.outputs.ipv4 }}' -d 'whitelist[port]=22' "https://${{ secrets.O2SWITCH_HOST }}:2083/$ENDPOINT?r=add" | jq
+          otp_secret: ${{ secrets.O2SWITCH_OTP_SECRET }}
+          o2switch_username: ${{ secrets.O2SWITCH_USER }}
+          o2switch_password: ${{ secrets.O2SWITCH_PASSWORD }}
+          o2switch_host: ${{ secrets.O2SWITCH_HOST }}
 
       - name: Deploy
         uses: easingthemes/ssh-deploy@v5.1.0
