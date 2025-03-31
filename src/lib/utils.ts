@@ -39,10 +39,10 @@ export const cropImageFromDataURL = (dataURL: string, width: number, keepRatio: 
     rawImage.src = dataURL as string
 
     rawImage.onload = () => {
-      width = Math.min(width * 1.5, rawImage.width)
-      const factor = rawImage.width / width
-      const cropWidth = width
-      const cropHeight = keepRatio ? rawImage.height / factor : width
+      const newWidth = Math.min(width * 1.5, rawImage.width)
+      const factor = rawImage.width / newWidth
+      const cropWidth = newWidth
+      const cropHeight = keepRatio ? rawImage.height / factor : newWidth
 
       const startX = keepRatio
         ? 0
